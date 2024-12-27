@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "./components/ScrollProgress";
 import { ThemeProvider } from './context/ThemeContext';
+import AnimatedBackground from './components/AnimatedBackground';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -105,6 +106,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ScrollProgress />
+          <AnimatedBackground />
           {children}
         </ThemeProvider>
       </body>

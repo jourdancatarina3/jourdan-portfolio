@@ -60,3 +60,127 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* Adjusts for fixed navbar height */
 }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(100px, -100px) scale(1.2);
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+}
+
+.animate-float-particle {
+  animation: float-particle var(--duration, 15s) ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes float-particle-large {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translate(100px, -150px) scale(1.5);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(200px, 0) scale(1);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(100px, 150px) scale(1.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+}
+
+@keyframes float-particle-medium {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(-100px, -100px) scale(1.2);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(100px, 100px) scale(1.4);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes float-particle-small {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(50px, -50px) rotate(180deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+    opacity: 0.4;
+  }
+}
+
+.animate-float-particle-large {
+  animation: float-particle-large var(--duration, 20s) ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-float-particle-medium {
+  animation: float-particle-medium var(--duration, 15s) ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-float-particle-small {
+  animation: float-particle-small var(--duration, 10s) ease-in-out infinite;
+  will-change: transform, opacity;
+}
