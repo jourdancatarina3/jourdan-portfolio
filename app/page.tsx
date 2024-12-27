@@ -1,101 +1,741 @@
+'use client';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import Image from "next/image";
+import Navbar from "./components/Navbar";
+import { FaReact, FaNodeJs, FaAws } from 'react-icons/fa';
+import { SiTypescript, SiMongodb, SiDocker } from 'react-icons/si';
+import SkillCard from './components/SkillCard';
+import WelcomeAnimation from './components/WelcomeAnimation';
+import { fadeInUp, staggerContainer } from './components/animations';
+import ScrollAnimation from './components/ScrollAnimation';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { HiMail } from 'react-icons/hi';
+
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  link: string;
+}
+
+interface Experience {
+  title: string;
+  company: string;
+  period: string;
+  description: string[];
+  technologies: string[];
+  logo: string;
+}
+
+interface Education {
+  degree: string;
+  school: string;
+  period: string;
+  description: string;
+  achievements: string[];
+  logo: string;
+  gpa?: string;
+}
+
+interface Social {
+  name: string;
+  icon: React.ElementType;
+  url: string;
+  color: string;
+}
+
+const socials: Social[] = [
+  {
+    name: 'GitHub',
+    icon: FaGithub,
+    url: 'https://github.com/jourdancatarina',
+    color: 'hover:text-[#2ea44f]'
+  },
+  {
+    name: 'LinkedIn',
+    icon: FaLinkedin,
+    url: 'https://linkedin.com/in/jourdancatarina',
+    color: 'hover:text-[#0077b5]'
+  },
+  {
+    name: 'Twitter',
+    icon: FaTwitter,
+    url: 'https://twitter.com/jourdancatarina',
+    color: 'hover:text-[#1da1f2]'
+  },
+  {
+    name: 'Email',
+    icon: HiMail,
+    url: 'mailto:jourdancatarina3@gmail.com',
+    color: 'hover:text-[#ea4c89]'
+  }
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const projects = [
+    {
+      title: "E-commerce Platform",
+      description: "A full-stack e-commerce platform built with Next.js and Stripe",
+      image: "https://images.unsplash.com/photo-1557821552-17105176677c",
+      tags: ["Next.js", "React", "Node.js", "MongoDB"],
+      link: "#"
+    },
+    {
+      title: "Social Media App",
+      description: "Mobile-first social media application with real-time messaging",
+      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+      tags: ["React Native", "Firebase", "Redux"],
+      link: "#"
+    },
+    {
+      title: "AI Content Generator",
+      description: "ML-powered platform for automated content generation",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+      tags: ["Python", "TensorFlow", "FastAPI", "React"],
+      link: "#"
+    },
+    {
+      title: "Project Management Tool",
+      description: "Collaborative project management solution with real-time updates",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+      tags: ["Vue.js", "GraphQL", "PostgreSQL"],
+      link: "#"
+    },
+    {
+      title: "Crypto Trading Bot",
+      description: "Automated cryptocurrency trading bot with advanced analytics",
+      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
+      tags: ["Python", "Docker", "AWS", "MongoDB"],
+      link: "#"
+    },
+    {
+      title: "IoT Dashboard",
+      description: "Real-time IoT device monitoring and management platform",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+      tags: ["React", "Node.js", "MQTT", "InfluxDB"],
+      link: "#"
+    }
+  ];
+
+  const skills = [
+    { name: 'React/Next.js', icon: FaReact, level: 90 },
+    { name: 'TypeScript', icon: SiTypescript, level: 85 },
+    { name: 'Node.js', icon: FaNodeJs, level: 80 },
+    { name: 'MongoDB', icon: SiMongodb, level: 75 },
+    { name: 'AWS', icon: FaAws, level: 70 },
+    { name: 'Docker', icon: SiDocker, level: 65 },
+  ];
+
+  const experiences: Experience[] = [
+    {
+      title: "Senior Full Stack Developer",
+      company: "Tech Innovators Inc.",
+      period: "2022 - Present",
+      description: [
+        "Led development of cloud-native applications serving 1M+ users",
+        "Architected and implemented microservices infrastructure",
+        "Mentored junior developers and established best practices"
+      ],
+      technologies: ["Next.js", "Node.js", "AWS", "MongoDB"],
+      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623" // Modern office building
+    },
+    {
+      title: "Full Stack Developer",
+      company: "Digital Solutions Co.",
+      period: "2020 - 2022",
+      description: [
+        "Developed and maintained enterprise-level web applications",
+        "Improved application performance by 40%",
+        "Implemented CI/CD pipelines and automated testing"
+      ],
+      technologies: ["React", "TypeScript", "Docker", "PostgreSQL"],
+      logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" // Corporate building
+    },
+    {
+      title: "Frontend Developer",
+      company: "Creative Web Labs",
+      period: "2018 - 2020",
+      description: [
+        "Built responsive web applications using modern frameworks",
+        "Collaborated with designers to implement pixel-perfect UIs",
+        "Reduced load time by 60% through optimization"
+      ],
+      technologies: ["React", "Redux", "SASS", "Webpack"],
+      logo: "https://images.unsplash.com/photo-1497366216548-37526070297c" // Creative office space
+    }
+  ];
+
+  const education: Education[] = [
+    {
+      degree: "Master of Science in Computer Science",
+      school: "Stanford University",
+      period: "2020 - 2022",
+      description: "Specialized in Artificial Intelligence and Machine Learning",
+      achievements: [
+        "Graduate Research Assistant in Deep Learning Lab",
+        "Published 2 papers in top-tier conferences",
+        "Teaching Assistant for Advanced Algorithms course"
+      ],
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Stanford_Cardinal_logo.svg/1200px-Stanford_Cardinal_logo.svg.png",
+      gpa: "3.92/4.0"
+    },
+    {
+      degree: "Bachelor of Science in Software Engineering",
+      school: "Massachusetts Institute of Technology",
+      period: "2016 - 2020",
+      description: "Focus on Software Architecture and Systems Design",
+      achievements: [
+        "Dean's List for all semesters",
+        "Led university's Programming Team",
+        "Completed honors thesis on distributed systems"
+      ],
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/1200px-MIT_logo.svg.png",
+      gpa: "3.89/4.0"
+    }
+  ];
+
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowWelcome(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  function ProjectCard({ project }: { project: Project }) {
+    return (
+      <motion.div
+        className="card h-full group flex flex-col"
+        whileHover={{ y: -5 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          className="relative overflow-hidden rounded-xl mb-4 flex-shrink-0"
+          whileHover="hover"
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={600}
+            height={400}
+            className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                      flex items-end justify-center p-4"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <motion.a
+              href={project.link}
+              className="px-6 py-2 bg-primary hover:bg-accent transition-colors rounded-full text-white font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Project
+            </motion.a>
+          </motion.div>
+        </motion.div>
+
+        <div className="flex-grow flex flex-col">
+          <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+            {project.title}
+          </h3>
+          <p className="text-text-secondary mb-4 flex-grow group-hover:text-text-primary transition-colors">
+            {project.description}
+          </p>
+          
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {project.tags.map((tag, index) => (
+              <span
+                key={index}
+                className="px-3 py-1 bg-secondary/50 rounded-full text-sm font-medium text-text-secondary"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </motion.div>
+    );
+  }
+
+  function EducationCard({ education }: { education: Education }) {
+    return (
+      <motion.div
+        className="card"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+          <div className="relative w-16 h-16 flex-shrink-0 mx-auto sm:mx-0">
+            <Image
+              src={education.logo}
+              alt={education.school}
+              fill
+              className="object-contain"
+            />
+          </div>
+          <div className="text-center sm:text-left flex-grow">
+            <h3 className="text-xl font-bold text-text-primary">{education.degree}</h3>
+            <p className="text-primary">{education.school}</p>
+            <p className="text-text-secondary">{education.period}</p>
+            {education.gpa && (
+              <p className="text-text-secondary">GPA: {education.gpa}</p>
+            )}
+          </div>
+        </div>
+        <p className="text-text-secondary mb-4">{education.description}</p>
+        <ul className="list-disc list-inside space-y-2 text-text-secondary">
+          {education.achievements.map((achievement, index) => (
+            <li key={index}>{achievement}</li>
+          ))}
+        </ul>
+      </motion.div>
+    );
+  }
+
+  return (
+    <>
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
+        style={{ scaleX }}
+      />
+      
+      {showWelcome && <WelcomeAnimation />}
+      <Navbar />
+      
+      {/* Hero Section */}
+      <ScrollAnimation>
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3 }}
+          id="home" 
+          className="section-padding min-h-screen flex items-center"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              animate="animate"
+            >
+              <motion.h1 
+                variants={fadeInUp}
+                className="text-5xl sm:text-7xl font-bold mb-6"
+              >
+                Hi, I&apos;m <span className="text-primary">Jourdan</span>
+              </motion.h1>
+              <motion.p 
+                variants={fadeInUp}
+                className="text-xl sm:text-2xl text-text-secondary mb-8"
+              >
+                Full Stack Developer specializing in modern web and mobile applications
+              </motion.p>
+              <motion.a
+                variants={fadeInUp}
+                href="#contact"
+                className="bg-primary hover:bg-accent transition-colors px-8 py-3 rounded-full text-white font-medium inline-block"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get in touch
+              </motion.a>
+              <motion.div 
+                variants={fadeInUp}
+                className="mt-8 flex items-center gap-6"
+              >
+                <span className="text-text-secondary">Follow me on</span>
+                <div className="flex items-center gap-4">
+                  {socials.map((social) => (
+                    <motion.a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-text-secondary ${social.color} transition-colors duration-300`}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      aria-label={social.name}
+                    >
+                      <social.icon className="w-6 h-6" />
+                    </motion.a>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.section>
+      </ScrollAnimation>
+
+      {/* Projects Section */}
+      <ScrollAnimation>
+        <section id="projects" className="section-padding">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="heading">Projects</h2>
+            <p className="subheading">
+              Here are some of my recent projects that showcase my skills and experience
+            </p>
+            
+            <motion.div 
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
+            >
+              {projects.map((project, index) => (
+                <ProjectCard 
+                  key={index} 
+                  project={project}
+                />
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* About Section */}
+      <ScrollAnimation>
+        <section id="about" className="section-padding">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="heading">About Me</h2>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6 animate-fade-in">
+                <p className="text-lg text-text-secondary">
+                  With over 5 years of experience in full-stack development, I specialize in building scalable web and mobile applications. My passion lies in creating elegant solutions to complex problems.
+                </p>
+                <p className="text-lg text-text-secondary">
+                  I&apos;m constantly learning new technologies and best practices to deliver cutting-edge solutions that meet modern development standards.
+                </p>
+                <div className="flex gap-4">
+                  <a
+                    href="/resume.pdf"
+                    className="bg-primary hover:bg-accent transition-colors px-6 py-2 rounded-full text-white font-medium"
+                  >
+                    Download Resume
+                  </a>
+                  <a
+                    href="#contact"
+                    className="border border-primary text-primary hover:bg-primary hover:text-white transition-colors px-6 py-2 rounded-full font-medium"
+                  >
+                    Contact Me
+                  </a>
+                </div>
+              </div>
+              <div className="relative h-[400px] animate-fade-in">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-20 rounded-2xl" />
+                <Image
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                  alt="Profile"
+                  fill
+                  className="object-cover rounded-2xl"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* Skills Section */}
+      <ScrollAnimation>
+        <section id="skills" className="section-padding bg-secondary/20">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="heading">Skills & Expertise</h2>
+            <p className="subheading">
+              Technologies and tools I work with
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-slide-up">
+              {skills.map((skill, index) => (
+                <SkillCard key={index} {...skill} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* Experience Section */}
+      <ScrollAnimation>
+        <section id="experience" className="section-padding">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="heading">Experience</h2>
+            <p className="subheading">
+              My professional journey in software development
+            </p>
+            
+            <div className="space-y-12">
+              {experiences.map((exp, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="group"
+                >
+                  <div className="relative bg-secondary/50 rounded-2xl p-6 md:p-8 hover:bg-secondary/70 transition-colors">
+                    {/* Timeline connector */}
+                    {index !== experiences.length - 1 && (
+                      <div className="absolute left-8 bottom-0 w-0.5 h-12 bg-primary/20 transform translate-y-full" />
+                    )}
+                    
+                    <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+                      {/* Company Logo */}
+                      <div className="relative w-24 h-24 lg:w-32 lg:h-32 rounded-2xl overflow-hidden bg-background/50">
+                        <Image
+                          src={exp.logo}
+                          alt={exp.company}
+                          fill
+                          className="object-cover hover:scale-110 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
+                      </div>
+
+                      <div className="flex-1">
+                        {/* Header */}
+                        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-4">
+                          <h3 className="text-xl font-bold text-primary">{exp.title}</h3>
+                          <div className="flex items-center gap-2 text-text-secondary">
+                            <span className="font-medium">{exp.company}</span>
+                            <span>•</span>
+                            <span>{exp.period}</span>
+                          </div>
+                        </div>
+
+                        {/* Description */}
+                        <ul className="space-y-2 mb-4">
+                          {exp.description.map((item, i) => (
+                            <motion.li
+                              key={i}
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.3 + (i * 0.1) }}
+                              className="flex items-start gap-2 text-text-secondary"
+                            >
+                              <span className="text-primary">▹</span>
+                              {item}
+                            </motion.li>
+                          ))}
+                        </ul>
+
+                        {/* Technologies */}
+                        <div className="flex flex-wrap gap-2">
+                          {exp.technologies.map((tech, i) => (
+                            <motion.span
+                              key={i}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.5 + (i * 0.1) }}
+                              className="px-3 py-1 rounded-full text-sm bg-primary/10 text-primary"
+                            >
+                              {tech}
+                            </motion.span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* Education Section */}
+      <ScrollAnimation>
+        <section id="education" className="section-padding">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="heading">Education</h2>
+            <p className="subheading">Academic Journey and Achievements</p>
+            
+            <div className="space-y-16">
+              {education.map((edu, index) => (
+                <EducationCard key={index} education={edu} />
+              ))}
+            </div>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* Contact Section */}
+      <ScrollAnimation>
+        <section id="contact" className="section-padding">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="heading">Get in Touch</h2>
+            <p className="subheading">
+              Let&apos;s discuss your next project
+            </p>
+            <div className="grid md:grid-cols-2 gap-12">
+              <form className="space-y-6 animate-fade-in">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="w-full px-4 py-2 bg-secondary rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="w-full px-4 py-2 bg-secondary rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="w-full px-4 py-2 bg-secondary rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-primary hover:bg-accent transition-colors px-8 py-3 rounded-full text-white font-medium"
+                >
+                  Send Message
+                </button>
+              </form>
+              <div className="space-y-8 animate-fade-in">
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Contact Information</h3>
+                  <div className="space-y-4">
+                    <p className="flex items-center gap-3">
+                      <span className="text-primary">📍</span> Cebu, Philippines
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <span className="text-primary">📧</span> jourdancatarina3@gmail.com
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-4">Follow Me</h3>
+                  <div className="flex gap-4">
+                    {socials.map((social) => (
+                      <motion.a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-text-secondary ${social.color} transition-colors duration-300`}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        aria-label={social.name}
+                      >
+                        <social.icon className="w-6 h-6" />
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </ScrollAnimation>
+
+      {/* Add more sections as needed */}
+      <Footer />
+    </>
+  );
+}
+
+function Footer() {
+  const currentYear = new Date().getFullYear();
+  
+  return (
+    <footer className="bg-secondary/20 border-t border-secondary/30">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Brand Column */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-primary">John Doe</h3>
+            <p className="text-text-secondary max-w-xs">
+              Building digital experiences with modern web technologies
+            </p>
+            <div className="flex items-center gap-4">
+              {socials.map((social) => (
+                <motion.a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-text-secondary ${social.color} transition-colors duration-300`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={social.name}
+                >
+                  <social.icon className="w-5 h-5" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links Column */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-text-primary">Quick Links</h3>
+            <ul className="space-y-2">
+              {['About', 'Projects', 'Experience', 'Contact'].map((item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase()}`}
+                    className="text-text-secondary hover:text-primary transition-colors duration-300"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Column */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-text-primary">Contact</h3>
+            <ul className="space-y-2">
+              <li className="flex items-center gap-2 text-text-secondary">
+                <HiMail className="w-5 h-5 text-primary" />
+                <a href="mailto:hello@example.com" className="hover:text-primary transition-colors duration-300">
+                  hello@example.com
+                </a>
+              </li>
+              <li className="text-text-secondary">
+                <span className="flex items-center gap-2">
+                  <span className="text-primary">📍</span>
+                  San Francisco, CA
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-8 pt-8 border-t border-secondary/30">
+          <p className="text-center text-text-secondary">
+            © {currentYear} Jourdan Catarina. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
