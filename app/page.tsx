@@ -11,11 +11,17 @@ import { fadeInUp, staggerContainer } from './components/animations';
 import ScrollAnimation from './components/ScrollAnimation';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 interface Project {
   title: string;
   description: string;
-  image: string;
+  images: {
+    original: string;
+    thumbnail: string;
+    description?: string;
+  }[];
   tags: string[];
   link: string;
 }
@@ -85,42 +91,138 @@ export default function Home() {
     {
       title: "E-commerce Platform",
       description: "A full-stack e-commerce platform built with Next.js and Stripe",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c",
+      images: [
+        {
+          original: "https://images.unsplash.com/photo-1557821552-17105176677c",
+          thumbnail: "https://images.unsplash.com/photo-1557821552-17105176677c?w=160",
+          description: "Main dashboard view"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1472851294608-062f824d29cc",
+          thumbnail: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=160",
+          description: "Product catalog"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+          thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=160",
+          description: "Shopping cart"
+        }
+      ],
       tags: ["Next.js", "React", "Node.js", "MongoDB"],
       link: "#"
     },
     {
       title: "Social Media App",
       description: "Mobile-first social media application with real-time messaging",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+      images: [
+        {
+          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
+          description: "Main screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
+          description: "Chat screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
+          description: "Profile screen"
+        }
+      ],
       tags: ["React Native", "Firebase", "Redux"],
       link: "#"
     },
     {
       title: "AI Content Generator",
       description: "ML-powered platform for automated content generation",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+      images: [
+        {
+          original: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+          thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=160",
+          description: "Main screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+          thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=160",
+          description: "Content generation"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+          thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=160",
+          description: "Content editing"
+        }
+      ],
       tags: ["Python", "TensorFlow", "FastAPI", "React"],
       link: "#"
     },
     {
       title: "Project Management Tool",
       description: "Collaborative project management solution with real-time updates",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+      images: [
+        {
+          original: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+          thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=160",
+          description: "Main screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+          thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=160",
+          description: "Project details"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+          thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=160",
+          description: "Task management"
+        }
+      ],
       tags: ["Vue.js", "GraphQL", "PostgreSQL"],
       link: "#"
     },
     {
       title: "Crypto Trading Bot",
       description: "Automated cryptocurrency trading bot with advanced analytics",
-      image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
+      images: [
+        {
+          original: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
+          thumbnail: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=160",
+          description: "Main screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
+          thumbnail: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=160",
+          description: "Trading analytics"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
+          thumbnail: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=160",
+          description: "Trade execution"
+        }
+      ],
       tags: ["Python", "Docker", "AWS", "MongoDB"],
       link: "#"
     },
     {
       title: "IoT Dashboard",
       description: "Real-time IoT device monitoring and management platform",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+      images: [
+        {
+          original: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+          thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=160",
+          description: "Main screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+          thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=160",
+          description: "Device details"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+          thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=160",
+          description: "Device management"
+        }
+      ],
       tags: ["React", "Node.js", "MQTT", "InfluxDB"],
       link: "#"
     }
@@ -211,61 +313,71 @@ export default function Home() {
   }, []);
 
   function ProjectCard({ project }: { project: Project }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
-      <motion.div
-        className="card h-full group flex flex-col"
-        whileHover={{ y: -5 }}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <>
         <motion.div
-          className="relative overflow-hidden rounded-xl mb-4 flex-shrink-0"
-          whileHover="hover"
+          className="card h-full group flex flex-col"
+          whileHover={{ y: -5 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          <Image
-            src={project.image}
-            alt={project.title}
-            width={600}
-            height={400}
-            className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110"
-          />
           <motion.div
-            className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                      flex items-end justify-center p-4"
+            className="relative overflow-hidden rounded-xl mb-4 flex-shrink-0"
+            whileHover="hover"
+            onClick={() => setIsModalOpen(true)}
           >
-            <motion.a
-              href={project.link}
-              className="px-6 py-2 bg-primary hover:bg-accent transition-colors rounded-full text-white font-medium"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <Image
+              src={project.images[0].original}
+              alt={project.title}
+              width={600}
+              height={400}
+              className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
+            />
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                        flex items-end justify-center p-4"
             >
-              View Project
-            </motion.a>
+              <motion.button
+                className="px-6 py-2 bg-primary hover:bg-accent transition-colors rounded-full text-white font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View Gallery
+              </motion.button>
+            </motion.div>
           </motion.div>
+
+          <div className="flex-grow flex flex-col">
+            <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+              {project.title}
+            </h3>
+            <p className="text-text-secondary mb-4 flex-grow group-hover:text-text-primary transition-colors">
+              {project.description}
+            </p>
+            
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {project.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-secondary/50 rounded-full text-sm font-medium text-text-secondary"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
-        <div className="flex-grow flex flex-col">
-          <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-            {project.title}
-          </h3>
-          <p className="text-text-secondary mb-4 flex-grow group-hover:text-text-primary transition-colors">
-            {project.description}
-          </p>
-          
-          <div className="flex flex-wrap gap-2 mt-auto">
-            {project.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 bg-secondary/50 rounded-full text-sm font-medium text-text-secondary"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </motion.div>
+        <ProjectModal
+          project={project}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      </>
     );
   }
 
@@ -336,7 +448,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Description */}
+          {/* Description */}x
           <motion.p 
             className="text-text-secondary mb-6"
             animate={{ opacity: isHovered ? 1 : 0.8 }}
@@ -367,6 +479,81 @@ export default function Home() {
             ))}
           </motion.div>
         </div>
+      </motion.div>
+    );
+  }
+
+  function ProjectModal({ 
+    project, 
+    isOpen, 
+    onClose 
+  }: { 
+    project: Project; 
+    isOpen: boolean; 
+    onClose: () => void;
+  }) {
+    if (!isOpen) return null;
+
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="relative max-w-6xl w-full bg-secondary p-6 rounded-2xl shadow-xl"
+          onClick={e => e.stopPropagation()}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/50 hover:bg-background/80 transition-colors"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{project.title}</h2>
+            <ImageGallery
+              items={project.images}
+              showPlayButton={false}
+              showFullscreenButton={true}
+              showNav={true}
+              showThumbnails={true}
+              showBullets={false}
+              autoPlay={false}
+              slideInterval={3000}
+              slideDuration={450}
+              thumbnailPosition="bottom"
+              additionalClass="custom-image-gallery"
+            />
+            <p className="text-text-secondary mt-4">{project.description}</p>
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     );
   }

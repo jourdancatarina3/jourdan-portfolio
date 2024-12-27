@@ -3,7 +3,8 @@ const nextConfig = {
   images: {
     domains: [
       'images.unsplash.com',
-      'upload.wikimedia.org'
+      'upload.wikimedia.org',
+      // Add any other image domains you need
     ],
   },
 }

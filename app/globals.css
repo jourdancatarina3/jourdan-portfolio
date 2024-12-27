@@ -184,3 +184,45 @@ html {
   animation: float-particle-small var(--duration, 10s) ease-in-out infinite;
   will-change: transform, opacity;
 }
+
+/* Custom styles for react-image-gallery */
+@layer components {
+  .custom-image-gallery {
+    .image-gallery-slide {
+      @apply bg-background;
+    }
+
+    .image-gallery-thumbnail {
+      @apply border-2 border-transparent transition-colors;
+      
+      &.active {
+        @apply border-primary;
+      }
+      
+      &:hover {
+        @apply border-accent;
+      }
+    }
+
+    .image-gallery-thumbnail-image {
+      @apply object-cover;
+    }
+
+    .image-gallery-icon {
+      @apply text-primary filter drop-shadow;
+      
+      &:hover {
+        @apply text-accent;
+      }
+    }
+
+    .image-gallery-fullscreen-button,
+    .image-gallery-play-button {
+      @apply bottom-auto top-4;
+    }
+
+    .image-gallery-description {
+      @apply bg-background backdrop-blur-sm text-text-primary opacity-80;
+    }
+  }
+}
