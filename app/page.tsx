@@ -318,7 +318,7 @@ export default function Home() {
     return (
       <>
         <motion.div
-          className="card h-full group flex flex-col"
+          className="card h-full group cursor-pointer flex flex-col"
           whileHover={{ y: -5 }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
