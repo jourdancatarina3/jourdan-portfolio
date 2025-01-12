@@ -24,6 +24,7 @@ interface Project {
   }[];
   tags: string[];
   link: string;
+  type: 'fullstack' | 'frontend';
 }
 
 interface Experience {
@@ -109,7 +110,8 @@ export default function Home() {
         }
       ],
       tags: ["React Native", "Firebase", "Redux"],
-      link: "#"
+      link: "#",
+      type: "fullstack" as const
     },
     {
       title: "Finite Automata Visualizer",
@@ -132,7 +134,8 @@ export default function Home() {
         }
       ],
       tags: ["Next.js", "React", "Node.js", "TypeScript"],
-      link: "https://favisualizer.vercel.app/"
+      link: "https://favisualizer.vercel.app/",
+      type: "fullstack" as const
     },
     {
       title: "Promptopia",
@@ -145,7 +148,8 @@ export default function Home() {
         },
       ],
       tags: ["Next.js", "React", "Tailwind",],
-      link: "https://promptopia-jrdn.vercel.app/"
+      link: "https://promptopia-jrdn.vercel.app/",
+      type: "fullstack" as const
     },
     {
       title: "Project Management Tool",
@@ -168,7 +172,8 @@ export default function Home() {
         }
       ],
       tags: ["Vue.js", "GraphQL", "PostgreSQL"],
-      link: "#"
+      link: "#",
+      type: "frontend" as const
     },
     {
       title: "Crypto Trading Bot",
@@ -191,7 +196,8 @@ export default function Home() {
         }
       ],
       tags: ["Python", "Docker", "AWS", "MongoDB"],
-      link: "#"
+      link: "#",
+      type: "fullstack" as const
     },
     {
       title: "IoT Dashboard",
@@ -214,7 +220,8 @@ export default function Home() {
         }
       ],
       tags: ["React", "Node.js", "MQTT", "InfluxDB"],
-      link: "#"
+      link: "#",
+      type: "frontend" as const
     }
   ];
 
@@ -329,6 +336,18 @@ export default function Home() {
             className="relative overflow-hidden rounded-xl mb-4 flex-shrink-0"
             whileHover="hover"
           >
+            <div className="absolute top-4 right-4 z-10">
+              <span 
+                className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm border ${
+                  project.type === 'fullstack' 
+                    ? 'bg-black/80 text-white border-white/20' 
+                    : 'bg-black/80 text-white border-white/20'
+                } shadow-lg`}
+              >
+                {project.type === 'fullstack' ? 'Full Stack' : 'Frontend'}
+              </span>
+            </div>
+
             <Image
               src={project.images[0].original}
               alt={project.title}
