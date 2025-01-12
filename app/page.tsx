@@ -89,27 +89,27 @@ export default function Home() {
 
   const projects = [
     {
-      title: "E-commerce Platform",
-      description: "A full-stack e-commerce platform built with Next.js and Stripe",
+      title: "Finite Automata Visualizer",
+      description: "A visualizer for finite automata built with NextJS and TypeScript",
       images: [
         {
-          original: "https://images.unsplash.com/photo-1557821552-17105176677c",
-          thumbnail: "https://images.unsplash.com/photo-1557821552-17105176677c?w=160",
-          description: "Main dashboard view"
+          original: "/projects/favisualizer1.png",
+          thumbnail: "/projects/favisualizer1.png",
+          description: "Main screen"
         },
         {
-          original: "https://images.unsplash.com/photo-1472851294608-062f824d29cc",
-          thumbnail: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=160",
-          description: "Product catalog"
+          original: "/projects/favisualizer2.png",
+          thumbnail: "/projects/favisualizer2.png",
+          description: "Main screen with sidebars"
         },
         {
-          original: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-          thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=160",
-          description: "Shopping cart"
+          original: "/projects/favisualizer3.png",
+          thumbnail: "/projects/favisualizer3.png",
+          description: "Mobile view and Tablet view"
         }
       ],
-      tags: ["Next.js", "React", "Node.js", "MongoDB"],
-      link: "#"
+      tags: ["Next.js", "React", "Node.js", "TypeScript"],
+      link: "https://favisualizer.vercel.app/"
     },
     {
       title: "Social Media App",
