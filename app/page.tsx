@@ -89,6 +89,29 @@ export default function Home() {
 
   const projects = [
     {
+      title: "Badge Guru",
+      description: "A mobile app that uses robust scanning technology to scan car emblems and automatically generate vector files for custom sticker cutting",
+      images: [
+        {
+          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
+          description: "Main screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
+          description: "Chat screen"
+        },
+        {
+          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
+          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
+          description: "Profile screen"
+        }
+      ],
+      tags: ["React Native", "Firebase", "Redux"],
+      link: "#"
+    },
+    {
       title: "Finite Automata Visualizer",
       description: "A visualizer for finite automata built with NextJS and TypeScript",
       images: [
@@ -112,50 +135,17 @@ export default function Home() {
       link: "https://favisualizer.vercel.app/"
     },
     {
-      title: "Social Media App",
-      description: "Mobile-first social media application with real-time messaging",
+      title: "Promptopia",
+      description: "AI prompting tool for modern world to discover, create and share creative prompts",
       images: [
         {
-          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
-          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
+          original: "/projects/promptopia.png",
+          thumbnail: "/projects/promptopia.png",
           description: "Main screen"
         },
-        {
-          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
-          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
-          description: "Chat screen"
-        },
-        {
-          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
-          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
-          description: "Profile screen"
-        }
       ],
-      tags: ["React Native", "Firebase", "Redux"],
-      link: "#"
-    },
-    {
-      title: "AI Content Generator",
-      description: "ML-powered platform for automated content generation",
-      images: [
-        {
-          original: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-          thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=160",
-          description: "Main screen"
-        },
-        {
-          original: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-          thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=160",
-          description: "Content generation"
-        },
-        {
-          original: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-          thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=160",
-          description: "Content editing"
-        }
-      ],
-      tags: ["Python", "TensorFlow", "FastAPI", "React"],
-      link: "#"
+      tags: ["Next.js", "React", "Tailwind",],
+      link: "https://promptopia-jrdn.vercel.app/"
     },
     {
       title: "Project Management Tool",
@@ -312,8 +302,17 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  function ProjectCard({ project }: { project: Project }) {
+  function ProjectCard({ project, isFirst }: { project: Project; isFirst: boolean }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleCardClick = () => {
+      window.open(project.link, '_blank', 'noopener,noreferrer');
+    };
+
+    const handleGalleryClick = (e: React.MouseEvent) => {
+      e.stopPropagation(); // Prevent card click when clicking gallery button
+      setIsModalOpen(true);
+    };
 
     return (
       <>
@@ -324,11 +323,11 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          onClick={handleCardClick}
         >
           <motion.div
             className="relative overflow-hidden rounded-xl mb-4 flex-shrink-0"
             whileHover="hover"
-            onClick={() => setIsModalOpen(true)}
           >
             <Image
               src={project.images[0].original}
@@ -337,18 +336,21 @@ export default function Home() {
               height={400}
               className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
             />
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                        flex items-end justify-center p-4"
-            >
-              <motion.button
-                className="px-6 py-2 bg-primary hover:bg-accent transition-colors rounded-full text-white font-medium"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            {isFirst && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                          flex items-end justify-center p-4"
               >
-                View Gallery
-              </motion.button>
-            </motion.div>
+                <motion.button
+                  className="px-6 py-2 bg-primary hover:bg-accent transition-colors rounded-full text-white font-medium"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleGalleryClick}
+                >
+                  View Gallery
+                </motion.button>
+              </motion.div>
+            )}
           </motion.div>
 
           <div className="flex-grow flex flex-col">
@@ -372,11 +374,13 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <ProjectModal
-          project={project}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
+        {isFirst && (
+          <ProjectModal
+            project={project}
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
       </>
     );
   }
@@ -650,7 +654,8 @@ export default function Home() {
               {projects.map((project, index) => (
                 <ProjectCard 
                   key={index} 
-                  project={project}
+                  project={project} 
+                  isFirst={index === 0}
                 />
               ))}
             </motion.div>
