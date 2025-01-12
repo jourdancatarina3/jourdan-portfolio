@@ -109,7 +109,7 @@ export default function Home() {
           description: "Profile screen"
         }
       ],
-      tags: ["React Native", "Firebase", "Redux"],
+      tags: ["React Native", "Expo", "AWS", "Directus CMS"],
       link: "#",
       type: "fullstack" as const
     },
@@ -152,75 +152,59 @@ export default function Home() {
       type: "fullstack" as const
     },
     {
-      title: "Project Management Tool",
-      description: "Collaborative project management solution with real-time updates",
+      title: "CarHub",
+      description: "Streamline your car rental experience with our effortless booking process.",
       images: [
         {
-          original: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-          thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=160",
+          original: "/projects/carhub.png",
+          thumbnail: "/projects/carhub.png",
           description: "Main screen"
         },
-        {
-          original: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-          thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=160",
-          description: "Project details"
-        },
-        {
-          original: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
-          thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=160",
-          description: "Task management"
-        }
       ],
-      tags: ["Vue.js", "GraphQL", "PostgreSQL"],
-      link: "#",
+      tags: ["Next.js", "React", "Typescript", "Tailwind"],
+      link: "https://carhub-jrdn.vercel.app/",
       type: "frontend" as const
     },
     {
-      title: "Crypto Trading Bot",
-      description: "Automated cryptocurrency trading bot with advanced analytics",
+      title: "GPT3 Landing Page",
+      description: "A landing page for GPT3, built with React and Vanilla CSS",
       images: [
         {
-          original: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
-          thumbnail: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=160",
+          original: "/projects/gpt3.png",
+          thumbnail: "/projects/gpt3.png",
           description: "Main screen"
         },
-        {
-          original: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
-          thumbnail: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=160",
-          description: "Trading analytics"
-        },
-        {
-          original: "https://images.unsplash.com/photo-1621761191319-c6fb62004040",
-          thumbnail: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=160",
-          description: "Trade execution"
-        }
       ],
-      tags: ["Python", "Docker", "AWS", "MongoDB"],
-      link: "#",
-      type: "fullstack" as const
+      tags: ["React", "Vanilla CSS"],
+      link: "https://gpt3-jrdn.vercel.app/",
+      type: "frontend" as const
     },
     {
-      title: "IoT Dashboard",
-      description: "Real-time IoT device monitoring and management platform",
+      title: "Gerícht Restaurant",
+      description: "A modern restaurant website built with React and styled with Vanilla CSS.",
       images: [
         {
-          original: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
-          thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=160",
+          original: "/projects/restaurant.png",
+          thumbnail: "/projects/restaurant.png",
           description: "Main screen"
         },
-        {
-          original: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
-          thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=160",
-          description: "Device details"
-        },
-        {
-          original: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
-          thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=160",
-          description: "Device management"
-        }
       ],
-      tags: ["React", "Node.js", "MQTT", "InfluxDB"],
-      link: "#",
+      tags: ["React", "Vanilla CSS"],
+      link: "https://gericht-jrdn.vercel.app/",
+      type: "frontend" as const
+    },
+    {
+      title: "Gerícht Restaurant",
+      description: "A modern restaurant website built with React and styled with Vanilla CSS.",
+      images: [
+        {
+          original: "/projects/restaurant.png",
+          thumbnail: "/projects/restaurant.png",
+          description: "Main screen"
+        },
+      ],
+      tags: ["React", "Vanilla CSS"],
+      link: "https://gericht-jrdn.vercel.app/",
       type: "frontend" as const
     }
   ];
