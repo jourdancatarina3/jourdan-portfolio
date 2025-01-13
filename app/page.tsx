@@ -711,7 +711,7 @@ export default function Home() {
               <div className="relative h-[400px] animate-fade-in">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-20 rounded-2xl" />
                 <Image
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                  src="/jourdan.png"
                   alt="Profile"
                   fill
                   className="object-cover rounded-2xl"
