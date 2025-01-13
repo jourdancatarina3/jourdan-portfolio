@@ -94,20 +94,30 @@ export default function Home() {
       description: "A mobile app that uses robust scanning technology to scan car emblems and automatically generate vector files for custom sticker cutting",
       images: [
         {
-          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
-          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
-          description: "Main screen"
+          original: "/projects/badgeguru1.png",
+          thumbnail: "/projects/badgeguru1.png",
+          description: "Home screen"
         },
         {
-          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
-          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
-          description: "Chat screen"
+          original: "/projects/badgeguru2.png",
+          thumbnail: "/projects/badgeguru2.png",
+          description: "Emblems screen"
         },
         {
-          original: "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
-          thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160",
-          description: "Profile screen"
-        }
+          original: "/projects/badgeguru3.png",
+          thumbnail: "/projects/badgeguru3.png",
+          description: "Scan screen"
+        },
+        {
+          original: "/projects/badgeguru4.png",
+          thumbnail: "/projects/badgeguru4.png",
+          description: "How To screen"
+        },
+        {
+          original: "/projects/badgeguru5.png",
+          thumbnail: "/projects/badgeguru5.png",
+          description: "Shop screen"
+        },
       ],
       tags: ["React Native", "Expo", "AWS", "Directus CMS"],
       link: "#",
@@ -194,17 +204,17 @@ export default function Home() {
       type: "frontend" as const
     },
     {
-      title: "Gerícht Restaurant",
-      description: "A modern restaurant website built with React and styled with Vanilla CSS.",
+      title: "Flavor Finder",
+      description: "Flavor Finder is a modern web application built with Vue 3 and Vite that helps users discover and explore recipes from around the world.",
       images: [
         {
-          original: "/projects/restaurant.png",
-          thumbnail: "/projects/restaurant.png",
+          original: "/projects/flavor-finder.png",
+          thumbnail: "/projects/flavor-finder.png",
           description: "Main screen"
         },
       ],
-      tags: ["React", "Vanilla CSS"],
-      link: "https://gericht-jrdn.vercel.app/",
+      tags: ["Vue", "Vite", "Tailwind"],
+      link: "https://flavor-finder-gules.vercel.app/",
       type: "frontend" as const
     }
   ];
@@ -297,7 +307,11 @@ export default function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleCardClick = () => {
-      window.open(project.link, '_blank', 'noopener,noreferrer');
+      if (project.link === "#") {
+        setIsModalOpen(true);
+      } else {
+        window.open(project.link, '_blank', 'noopener,noreferrer');
+      }
     };
 
     const handleGalleryClick = (e: React.MouseEvent) => {
