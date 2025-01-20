@@ -541,10 +541,10 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6 animate-fade-in">
                 <p className="text-lg text-text-secondary">
-                  With over 5 years of experience in full-stack development, I specialize in building scalable web and mobile applications. My passion lies in creating elegant solutions to complex problems.
+                  As a Full Stack Developer with expertise in React Native and web technologies, I specialize in building scalable mobile and web applications. Currently pursuing my Computer Science degree at UP Cebu while maintaining Dean&apos;s List standing, I bring a strong academic foundation combined with practical industry experience.
                 </p>
                 <p className="text-lg text-text-secondary">
-                  I&apos;m constantly learning new technologies and best practices to deliver cutting-edge solutions that meet modern development standards.
+                  I&apos;m proficient in React/Next.js, React Native, TypeScript, Node.js, and various modern development tools, consistently delivering high-quality solutions that meet business needs. My professional journey includes developing Badge Guru&apos;s mobile application, maintaining HQzen&apos;s production website, and creating responsive web solutions at Mind Fusion Ltd.
                 </p>
                 <div className="flex gap-4">
                   <a
