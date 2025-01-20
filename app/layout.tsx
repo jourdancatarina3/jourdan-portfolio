@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "./components/ScrollProgress";
@@ -65,11 +65,7 @@ export const metadata: Metadata = {
     creator: "@jourdancatarina",
     images: ["/og-image.jpg"], // Same image as OpenGraph
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
+  metadataBase: new URL('https://jourdancatarina.com'),
   verification: {
     google: "your-google-site-verification", // Add your Google verification code
     yandex: "your-yandex-verification", // Optional
@@ -88,6 +84,13 @@ export const metadata: Metadata = {
     },
   },
   manifest: "/site.webmanifest",
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  colorScheme: 'dark light',
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
