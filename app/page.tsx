@@ -3,13 +3,13 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-import { FaReact, FaNodeJs, FaAws } from 'react-icons/fa';
-import { SiTypescript, SiMongodb, SiDocker } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaAws, FaVuejs } from 'react-icons/fa';
+import { SiTypescript, SiMongodb, SiDjango, SiTailwindcss } from 'react-icons/si';
 import SkillCard from './components/SkillCard';
 import WelcomeAnimation from './components/WelcomeAnimation';
 import { fadeInUp, staggerContainer } from './components/animations';
 import ScrollAnimation from './components/ScrollAnimation';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -57,20 +57,14 @@ const socials: Social[] = [
   {
     name: 'GitHub',
     icon: FaGithub,
-    url: 'https://github.com/jourdancatarina',
+    url: 'https://github.com/jourdancatarina3',
     color: 'hover:text-[#2ea44f]'
   },
   {
     name: 'LinkedIn',
     icon: FaLinkedin,
-    url: 'https://linkedin.com/in/jourdancatarina',
+    url: 'https://www.linkedin.com/in/jourdan-ken-catarina-606485241/',
     color: 'hover:text-[#0077b5]'
-  },
-  {
-    name: 'Twitter',
-    icon: FaTwitter,
-    url: 'https://twitter.com/jourdancatarina',
-    color: 'hover:text-[#1da1f2]'
   },
   {
     name: 'Email',
@@ -221,78 +215,112 @@ export default function Home() {
 
   const skills = [
     { name: 'React/Next.js', icon: FaReact, level: 90 },
+    { name: 'React Native', icon: FaReact, level: 90 },
     { name: 'TypeScript', icon: SiTypescript, level: 85 },
     { name: 'Node.js', icon: FaNodeJs, level: 80 },
-    { name: 'MongoDB', icon: SiMongodb, level: 75 },
-    { name: 'AWS', icon: FaAws, level: 70 },
-    { name: 'Docker', icon: SiDocker, level: 65 },
+    { name: 'Expo', icon: SiMongodb, level: 80 },
+    { name: 'Django', icon: SiDjango, level: 70 },
+    { name: 'AWS', icon: FaAws, level: 60 },
+    { name: 'Vue', icon: FaVuejs, level: 80 },
+    { name: 'Tailwind', icon: SiTailwindcss, level: 90 },
   ];
 
   const experiences: Experience[] = [
     {
-      title: "Senior Full Stack Developer",
-      company: "Tech Innovators Inc.",
-      period: "2022 - Present",
+      title: "Mobile Application Developer",
+      company: "Bitwork Solutions",
+      period: "May 2024 - Present",
       description: [
-        "Led development of cloud-native applications serving 1M+ users",
-        "Architected and implemented microservices infrastructure",
-        "Mentored junior developers and established best practices"
+        "Led the development of Badge Guru, a React Native mobile application that scans vehicle emblems and generates precise templates for replacement adhesives.",
+        "Built a complete in-app e-commerce system with product catalog, shopping cart, and order management, integrating Stripe for secure payment processing.",
+        "Implemented a comprehensive user authentication system and profile management features, including secure image handling and user preferences.",
+        "Developed real-time emblem scanning functionality with camera integration, supporting both iOS and Android platforms.",
+        "Built a robust feedback system with email integration using Mailgun, allowing direct user communication and feature suggestions.",
+        "Created an intuitive tutorial system with categorized content management, improving user onboarding and engagement.",
+        "Integrated subscription management for premium features, implementing both one-time purchases and recurring subscriptions.",
+        "Designed and implemented a responsive UI with smooth animations and transitions using React Native's native capabilities."
       ],
-      technologies: ["Next.js", "Node.js", "AWS", "MongoDB"],
-      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623" // Modern office building
+      technologies: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Stripe",
+        "Directus",
+        "AWS",
+        "Tailwind CSS",
+        "Mailgun"
+      ],
+      logo: "/projects/badgeguru1.png"
     },
     {
       title: "Full Stack Developer",
-      company: "Digital Solutions Co.",
-      period: "2020 - 2022",
+      company: "HQzen",
+      period: "Jan 2024 - May 2024",
       description: [
-        "Developed and maintained enterprise-level web applications",
-        "Improved application performance by 40%",
-        "Implemented CI/CD pipelines and automated testing"
+        "Maintained and resolved critical bugs on HQzen’s production website, ensuring uptime and seamless functionality for a growing user base.",
+        "Developed new features to enhance workforce management, including the assignment of employees to respective workforces, streamlining operational efficiency.",
+        "Collaborated with cross-functional teams to understand business requirements and deliver scalable solutions using VueJS and Django.",
+        "Participated in code reviews and syncronized with the team to ensure the best possible solution was implemented fostering a collaborative development environment.",
       ],
-      technologies: ["React", "TypeScript", "Docker", "PostgreSQL"],
-      logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" // Corporate building
+      technologies: ["Vue.js", "Django", "Python", "PostgreSQL"],
+      logo: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45" // Adjust as necessary
     },
     {
       title: "Frontend Developer",
-      company: "Creative Web Labs",
-      period: "2018 - 2020",
+      company: "Mind Fusion Ltd",
+      period: "Oct 2021 - Aug 2022",
       description: [
-        "Built responsive web applications using modern frameworks",
-        "Collaborated with designers to implement pixel-perfect UIs",
-        "Reduced load time by 60% through optimization"
+        "Developed a fully functional website for software product reviews, taking ownership of the entire front-end development process.",
+        "Designed and optimized web pages using Figma, enhancing usability and visual appeal.",
+        "Collaborated closely with the team to implement client requirements, troubleshoot issues, and ensure smooth API integrations.",
+        "Converted mockups into responsive web pages using HTML, JavaScript, React, NextJS, and Tailwind CSS.",
+        "Delivered features compatible with both mobile and desktop platforms to meet diverse user needs."
       ],
-      technologies: ["React", "Redux", "SASS", "Webpack"],
-      logo: "https://images.unsplash.com/photo-1497366216548-37526070297c" // Creative office space
-    }
+      technologies: ["React", "Next.js", "JavaScript", "Tailwind CSS", "Figma"],
+      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623" // Adjust as necessary
+    },
   ];
 
   const education: Education[] = [
     {
-      degree: "Master of Science in Computer Science",
-      school: "Stanford University",
-      period: "2020 - 2022",
-      description: "Specialized in Artificial Intelligence and Machine Learning",
+      degree: "Bachelor of Science in Computer Science",
+      school: "University of the Philippines - Cebu",
+      period: "2022 - Present",
+      description: "Focusing on Software Engineering and Web Development",
       achievements: [
-        "Graduate Research Assistant in Deep Learning Lab",
-        "Published 2 papers in top-tier conferences",
-        "Teaching Assistant for Advanced Algorithms course"
+        "Consistent Dean's Lister since First Year (2022-Present)",
+        "Active member of UP Computer Science Guild",
+        "Contributed to multiple collaborative software projects",
+        "Maintained academic excellence while pursuing freelance development work"
       ],
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Stanford_Cardinal_logo.svg/1200px-Stanford_Cardinal_logo.svg.png",
-      gpa: "3.92/4.0"
+      logo: "/projects/up-logo.png",
+      gpa: "1.45/1.0"
     },
     {
-      degree: "Bachelor of Science in Software Engineering",
-      school: "Massachusetts Institute of Technology",
-      period: "2016 - 2020",
-      description: "Focus on Software Architecture and Systems Design",
+      degree: "Senior High School",
+      school: "Cebu City National Science High School",
+      period: "2020 - 2022",
+      description: "STEM Track with focus on Research and Technology",
       achievements: [
-        "Dean's List for all semesters",
-        "Led university's Programming Team",
-        "Completed honors thesis on distributed systems"
+        "Graduated with High Honors",
+        "Consistent High Honor Student (Grade 11-12)",
+        "Conducted research on technological solutions for local community problems"
       ],
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/1200px-MIT_logo.svg.png",
-      gpa: "3.89/4.0"
+      logo: "/projects/scihi-logo.png",
+      gpa: "96/100"
+    },
+    {
+      degree: "Junior High School",
+      school: "Cebu City National Science High School",
+      period: "2016 - 2020",
+      description: "Science and Technology Curriculum",
+      achievements: [
+        "Consistent Honor Student (Grade 7-10)",
+        "Participated in various academic competitions",
+        "Developed strong foundation in STEM subjects"
+      ],
+      logo: "/projects/scihi-logo.png",
+      gpa: "93/100"
     }
   ];
 
