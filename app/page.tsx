@@ -231,7 +231,7 @@ export default function Home() {
     {
       title: "Mobile Application Developer",
       company: "Bitwork Solutions",
-      period: "May 2024 - Present",
+      period: "March 2024 - Present",
       description: [
         "Led the development of Badge Guru, a React Native mobile application that scans vehicle emblems and generates precise templates for replacement adhesives.",
         "Built a complete in-app e-commerce system with product catalog, shopping cart, and order management, integrating Stripe for secure payment processing.",
