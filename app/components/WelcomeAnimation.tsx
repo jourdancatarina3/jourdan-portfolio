@@ -1,15 +1,8 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export default function WelcomeAnimation() {
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
-
   const messages = [
     "Loading awesome developer...",
     "Hey, I'm Jourdan! 👋",
@@ -17,15 +10,23 @@ export default function WelcomeAnimation() {
     "Let's build something great! 🚀",
   ];
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   const [messageIndex, setMessageIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMessageIndex((prev) => (prev + 1) % messages.length);
-    }, 800);
+  const updateMessageIndex = useCallback(() => {
+    setMessageIndex((prev) => (prev + 1) % messages.length);
+  }, [messages.length]);
 
+  useEffect(() => {
+    const interval = setInterval(updateMessageIndex, 800);
     return () => clearInterval(interval);
-  }, []);
+  }, [updateMessageIndex]);
 
   return (
     <motion.div
