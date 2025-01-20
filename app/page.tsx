@@ -11,8 +11,6 @@ import { fadeInUp, staggerContainer } from './components/animations';
 import ScrollAnimation from './components/ScrollAnimation';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
-import ImageGallery from 'react-image-gallery';
-import 'react-image-gallery/styles/css/image-gallery.css';
 import Footer from './components/Footer';
 import EducationCard from './components/EducationCard';
 import ProjectModal from './components/ProjectModal';
@@ -253,7 +251,7 @@ export default function Home() {
         "Tailwind CSS",
         "Mailgun"
       ],
-      logo: "/projects/badgeguru1.png"
+      logo: "/projects/bitwork-logo.jpeg"
     },
     {
       title: "Full Stack Developer",
@@ -266,7 +264,7 @@ export default function Home() {
         "Participated in code reviews and syncronized with the team to ensure the best possible solution was implemented fostering a collaborative development environment.",
       ],
       technologies: ["Vue.js", "Django", "Python", "PostgreSQL"],
-      logo: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45" // Adjust as necessary
+      logo: "/projects/hqzen-logo.png"
     },
     {
       title: "Frontend Developer",
@@ -280,7 +278,7 @@ export default function Home() {
         "Delivered features compatible with both mobile and desktop platforms to meet diverse user needs."
       ],
       technologies: ["React", "Next.js", "JavaScript", "Tailwind CSS", "Figma"],
-      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623" // Adjust as necessary
+      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623"
     },
   ];
 
@@ -562,10 +560,10 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-              <div className="relative h-[400px] animate-fade-in">
+              <div className="relative h-[450px] animate-fade-in">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-20 rounded-2xl" />
                 <Image
-                  src="/jourdan.png"
+                  src="/jourdan.jpg"
                   alt="Profile"
                   fill
                   className="object-cover rounded-2xl"
