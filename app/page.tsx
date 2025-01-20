@@ -469,15 +469,26 @@ export default function Home() {
               >
                 Full Stack Developer specializing in modern web and mobile applications
               </motion.p>
-              <motion.a
-                variants={fadeInUp}
-                href="#contact"
-                className="bg-primary hover:bg-accent transition-colors px-8 py-3 rounded-full text-white font-medium inline-block"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get in touch
-              </motion.a>
+              <div className="flex gap-4">
+                <motion.a
+                  variants={fadeInUp}
+                  href="#contact"
+                  className="bg-primary hover:bg-accent transition-colors px-8 py-3 rounded-full text-white font-medium inline-block"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Get in touch
+                </motion.a>
+                <motion.a
+                  variants={fadeInUp}
+                  href="/resume.pdf"
+                  className="border border-primary text-primary hover:bg-primary hover:text-white transition-colors px-8 py-3 rounded-full font-medium inline-block"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Download Resume
+                </motion.a>
+              </div>
               <motion.div 
                 variants={fadeInUp}
                 className="mt-8 flex items-center gap-6"
