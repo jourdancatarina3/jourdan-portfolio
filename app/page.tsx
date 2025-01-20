@@ -14,6 +14,7 @@ import { HiMail } from 'react-icons/hi';
 import Footer from './components/Footer';
 import EducationCard from './components/EducationCard';
 import ProjectModal from './components/ProjectModal';
+import ContactSection from './components/ContactSection';
 
 interface Project {
   title: string;
@@ -710,86 +711,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <ScrollAnimation>
-        <section id="contact" className="section-padding">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="heading">Get in Touch</h2>
-            <p className="subheading">
-              Let&apos;s discuss your next project
-            </p>
-            <div className="grid md:grid-cols-2 gap-12">
-              <form className="space-y-6 animate-fade-in">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-2 bg-secondary rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-2 bg-secondary rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full px-4 py-2 bg-secondary rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-primary hover:bg-accent transition-colors px-8 py-3 rounded-full text-white font-medium"
-                >
-                  Send Message
-                </button>
-              </form>
-              <div className="space-y-8 animate-fade-in">
-                <div>
-                  <h3 className="text-xl font-bold mb-4">Contact Information</h3>
-                  <div className="space-y-4">
-                    <p className="flex items-center gap-3">
-                      <span className="text-primary">📍</span> Cebu, Philippines
-                    </p>
-                    <p className="flex items-center gap-3">
-                      <span className="text-primary">📧</span> jourdancatarina3@gmail.com
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-4">Follow Me</h3>
-                  <div className="flex gap-4">
-                    {socials.map((social) => (
-                      <motion.a
-                        key={social.name}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-text-secondary ${social.color} transition-colors duration-300`}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        aria-label={social.name}
-                      >
-                        <social.icon className="w-6 h-6" />
-                      </motion.a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ContactSection socials={socials} />
       </ScrollAnimation>
 
       {/* Add more sections as needed */}
