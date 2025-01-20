@@ -13,6 +13,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import Footer from './components/Footer';
 
 interface Project {
   title: string;
@@ -257,7 +258,7 @@ export default function Home() {
       company: "HQzen",
       period: "Jan 2024 - May 2024",
       description: [
-        "Maintained and resolved critical bugs on HQzen’s production website, ensuring uptime and seamless functionality for a growing user base.",
+        "Maintained and resolved critical bugs on HQzen's production website, ensuring uptime and seamless functionality for a growing user base.",
         "Developed new features to enhance workforce management, including the assignment of employees to respective workforces, streamlining operational efficiency.",
         "Collaborated with cross-functional teams to understand business requirements and deliver scalable solutions using VueJS and Django.",
         "Participated in code reviews and syncronized with the team to ensure the best possible solution was implemented fostering a collaborative development environment.",
@@ -971,84 +972,5 @@ export default function Home() {
       {/* Add more sections as needed */}
       <Footer />
     </>
-  );
-}
-
-function Footer() {
-  const currentYear = new Date().getFullYear();
-  
-  return (
-    <footer className="bg-secondary/20 border-t border-secondary/30">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand Column */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-primary">John Doe</h3>
-            <p className="text-text-secondary max-w-xs">
-              Building digital experiences with modern web technologies
-            </p>
-            <div className="flex items-center gap-4">
-              {socials.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`text-text-secondary ${social.color} transition-colors duration-300`}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  aria-label={social.name}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Links Column */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-text-primary">Quick Links</h3>
-            <ul className="space-y-2">
-              {['About', 'Projects', 'Experience', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-text-secondary hover:text-primary transition-colors duration-300"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-text-primary">Contact</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center gap-2 text-text-secondary">
-                <HiMail className="w-5 h-5 text-primary" />
-                <a href="mailto:hello@example.com" className="hover:text-primary transition-colors duration-300">
-                  hello@example.com
-                </a>
-              </li>
-              <li className="text-text-secondary">
-                <span className="flex items-center gap-2">
-                  <span className="text-primary">📍</span>
-                  San Francisco, CA
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-secondary/30">
-          <p className="text-center text-text-secondary">
-            © {currentYear} Jourdan Catarina. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
   );
 }
