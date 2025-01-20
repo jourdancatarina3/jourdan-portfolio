@@ -480,13 +480,14 @@ export default function Home() {
                   Get in touch
                 </motion.a>
                 <motion.a
-                  variants={fadeInUp}
                   href="/resume.pdf"
-                  className="border border-primary text-primary hover:bg-primary hover:text-white transition-colors px-8 py-3 rounded-full font-medium inline-block"
+                  className="border border-primary hover:border-accent hover:text-accent text-primary px-8 py-3 rounded-full font-medium inline-block"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Download Resume
+                  Resume
                 </motion.a>
               </div>
               <motion.div 
@@ -562,11 +563,11 @@ export default function Home() {
                     href="/resume.pdf"
                     className="bg-primary hover:bg-accent transition-colors px-6 py-2 rounded-full text-white font-medium"
                   >
-                    Download Resume
+                    Resume
                   </a>
                   <a
                     href="#contact"
-                    className="border border-primary text-primary hover:bg-primary hover:text-white transition-colors px-6 py-2 rounded-full font-medium"
+                    className="border border-primary text-primary hover:border-accent hover:text-accent transition-colors px-6 py-2 rounded-full font-medium"
                   >
                     Contact Me
                   </a>
