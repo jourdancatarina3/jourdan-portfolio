@@ -13,8 +13,8 @@ interface ContactFormInputs {
 
 interface Social {
   name: string;
-  icon: React.ElementType;
   url: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   color: string;
 }
 
@@ -24,7 +24,13 @@ interface ContactSectionProps {
 
 export default function ContactSection({ socials }: ContactSectionProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'limit-reached'>('idle');
+  const [responseData, setResponseData] = useState<{
+    messagesRemaining?: number;
+    limitReached?: boolean;
+    resetTime?: string;
+    error?: string;
+  }>({});
   
   const {
     register,
@@ -46,8 +52,17 @@ export default function ContactSection({ socials }: ContactSectionProps) {
         body: JSON.stringify(data),
       });
 
+      const responseData = await response.json();
+      setResponseData(responseData);
+
+      if (response.status === 429) {
+        // Rate limit exceeded
+        setSubmitStatus('limit-reached');
+        return;
+      }
+      
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        throw new Error(responseData.error || 'Failed to send message');
       }
 
       setSubmitStatus('success');
@@ -154,7 +169,23 @@ export default function ContactSection({ socials }: ContactSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="p-4 bg-green-500/10 text-green-500 rounded-lg"
               >
-                Message sent successfully! I&apos;ll get back to you soon.
+                <p>Message sent successfully! I&apos;ll get back to you soon.</p>
+                {responseData.messagesRemaining !== undefined && (
+                  <p className="mt-2 text-sm">
+                    You have {responseData.messagesRemaining} {responseData.messagesRemaining === 1 ? 'message' : 'messages'} remaining today.
+                  </p>
+                )}
+              </motion.div>
+            )}
+
+            {submitStatus === 'limit-reached' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-yellow-500/10 text-yellow-500 rounded-lg"
+              >
+                <p>Message limit reached. You can only send 3 messages per day.</p>
+                <p className="mt-2 text-sm">Please try again {responseData.resetTime || 'later'}.</p>
               </motion.div>
             )}
 
@@ -172,7 +203,7 @@ export default function ContactSection({ socials }: ContactSectionProps) {
               variants={fadeInUp}
               type="submit"
               className="w-full bg-primary hover:bg-accent transition-colors px-8 py-3 rounded-full text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={isSubmitting}
+              disabled={isSubmitting || submitStatus === 'limit-reached'}
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>

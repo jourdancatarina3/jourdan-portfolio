@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
   try {
@@ -10,6 +11,23 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
+      );
+    }
+
+    // Rate limiting implementation - max 3 messages per device
+    const cookieStore = await cookies();
+    const messageSentCount = cookieStore.get('messageSentCount')?.value || '0';
+    const currentCount = parseInt(messageSentCount, 10);
+    
+    if (currentCount >= 3) {
+      return NextResponse.json(
+        { 
+          error: 'Message limit reached. Maximum 3 messages allowed per day.',
+          limitExceeded: true,
+          messagesRemaining: 0,
+          resetTime: 'in 24 hours' 
+        },
+        { status: 429 }
       );
     }
 
@@ -79,10 +97,30 @@ export async function POST(request: Request) {
     // Send confirmation email
     await transporter.sendMail(confirmationMailOptions);
 
-    return NextResponse.json(
-      { message: 'Email sent successfully' },
+    // Calculate remaining messages
+    const remainingMessages = 3 - (currentCount + 1);
+    const limitReached = (currentCount + 1) >= 3;
+
+    // Update message count cookie
+    const response = NextResponse.json(
+      { 
+        message: 'Email sent successfully',
+        messagesRemaining: remainingMessages,
+        limitReached: limitReached,
+        resetTime: limitReached ? 'in 24 hours' : null
+      },
       { status: 200 }
     );
+    
+    // Set cookie to expire in 24 hours
+    response.cookies.set('messageSentCount', (currentCount + 1).toString(), {
+      httpOnly: true,
+      path: '/',
+      maxAge: 60 * 60 * 24, // 24 hours
+      sameSite: 'strict',
+    });
+
+    return response;
   } catch (error) {
     console.error('Failed to send email:', error);
     return NextResponse.json(
