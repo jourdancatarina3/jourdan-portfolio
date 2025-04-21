@@ -5,7 +5,7 @@ import { HiMail } from 'react-icons/hi';
 
 interface Social {
   name: string;
-  icon: React.ElementType;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   url: string;
   color: string;
 }
