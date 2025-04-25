@@ -20,6 +20,22 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## reCAPTCHA Setup
+
+This project uses Google reCAPTCHA v2 for the contact form. To set it up:
+
+1. Register your site on [Google reCAPTCHA](https://www.google.com/recaptcha/admin)
+2. Create a `.env.local` file in the root directory with the following variables:
+   ```
+   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_site_key
+   RECAPTCHA_SECRET_KEY=your_secret_key
+   ```
+3. For development, you can use Google's test keys:
+   ```
+   NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+   RECAPTCHA_SECRET_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+   ```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

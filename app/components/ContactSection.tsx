@@ -1,7 +1,8 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 // import { HiMail } from 'react-icons/hi';
 import { fadeInUp, staggerContainer } from './animations';
 
@@ -25,6 +26,8 @@ interface ContactSectionProps {
 export default function ContactSection({ socials }: ContactSectionProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'limit-reached'>('idle');
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [responseData, setResponseData] = useState<{
     messagesRemaining?: number;
     limitReached?: boolean;
@@ -40,6 +43,11 @@ export default function ContactSection({ socials }: ContactSectionProps) {
   } = useForm<ContactFormInputs>();
 
   const onSubmit: SubmitHandler<ContactFormInputs> = async (data) => {
+    if (!captchaVerified) {
+      alert('Please verify that you are not a robot');
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -49,7 +57,10 @@ export default function ContactSection({ socials }: ContactSectionProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          recaptchaToken: recaptchaRef.current?.getValue()
+        }),
       });
 
       const responseData = await response.json();
@@ -67,6 +78,10 @@ export default function ContactSection({ socials }: ContactSectionProps) {
 
       setSubmitStatus('success');
       reset(); // Clear form
+      setCaptchaVerified(false);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
       
       // Reset success message after 5 seconds
       setTimeout(() => {
@@ -79,6 +94,10 @@ export default function ContactSection({ socials }: ContactSectionProps) {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleRecaptchaChange = (token: string | null) => {
+    setCaptchaVerified(!!token);
   };
 
   return (
@@ -163,6 +182,14 @@ export default function ContactSection({ socials }: ContactSectionProps) {
               )}
             </motion.div>
 
+            <motion.div variants={fadeInUp} className="w-full flex justify-center">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey="6Ld0zSMrAAAAAMGIcQMZ14QfRBzyi_0xYMD8W3AO" 
+                onChange={handleRecaptchaChange}
+              />
+            </motion.div>
+
             {submitStatus === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -203,7 +230,7 @@ export default function ContactSection({ socials }: ContactSectionProps) {
               variants={fadeInUp}
               type="submit"
               className="w-full bg-primary hover:bg-accent transition-colors px-8 py-3 rounded-full text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={isSubmitting || submitStatus === 'limit-reached'}
+              disabled={isSubmitting || submitStatus === 'limit-reached' || !captchaVerified}
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>

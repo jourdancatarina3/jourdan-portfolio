@@ -2,14 +2,51 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { cookies } from 'next/headers';
 
+// Function to verify reCAPTCHA token
+async function verifyRecaptcha(token: string) {
+  const secretKey = '6Ld0zSMrAAAAAOJoBSkd2NH81LmlE71Ye3L-wl1_'; // Google's test secret key
+  
+  try {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `secret=${secretKey}&response=${token}`,
+    });
+    
+    const data = await response.json();
+    return data.success;
+  } catch (error) {
+    console.error('reCAPTCHA verification failed:', error);
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const { name, email, message, recaptchaToken } = await request.json();
 
     // Basic validation
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA
+    if (!recaptchaToken) {
+      return NextResponse.json(
+        { error: 'reCAPTCHA verification required' },
+        { status: 400 }
+      );
+    }
+
+    const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
+    if (!isRecaptchaValid) {
+      return NextResponse.json(
+        { error: 'reCAPTCHA verification failed' },
         { status: 400 }
       );
     }
