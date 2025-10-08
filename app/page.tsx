@@ -368,9 +368,10 @@ export default function Home() {
 
     const titlePriority = (title: string) => {
       const priorities: Record<string, number> = {
-        'Haircat App': 0,
-        'Haircat Barber App': 1,
-        'Badge Guru': 2,
+        'VEA AI': 0,
+        'Haircat App': 1,
+        'Haircat Barber App': 2,
+        'Badge Guru': 3,
       };
       return priorities[title] ?? 999;
     };
