@@ -123,6 +123,51 @@ export default function Home() {
       isMobileApp: true
     },
     {
+      title: "Haircat App",
+      description: "A customer-facing mobile app for discovering barbers, applying powerful filters (nearest, ratings, price, and more), booking appointments, and chatting in real time. Includes push notifications and an AI-powered haircut recommender that analyzes the user's face shape, age, and hair type to suggest three personalized haircuts.",
+      images: [
+        {
+          original: "/projects/haircat1.png",
+          thumbnail: "/projects/haircat1.png",
+          description: "Home screen"
+        },
+        {
+          original: "/projects/haircat2.png",
+          thumbnail: "/projects/haircat2.png",
+          description: "All barbers screen"
+        },
+        {
+          original: "/projects/haircat3.png",
+          thumbnail: "/projects/haircat3.png",
+          description: "Filters"
+        },
+        {
+          original: "/projects/haircat4.png",
+          thumbnail: "/projects/haircat4.png",
+          description: "Barber detail screen"
+        },
+        {
+          original: "/projects/haircat5.png",
+          thumbnail: "/projects/haircat5.png",
+          description: "Booking history screen"
+        },
+        {
+          original: "/projects/haircat6.png",
+          thumbnail: "/projects/haircat6.png",
+          description: "Upcoming booking details screen"
+        },
+        {
+          original: "/projects/haircat7.png",
+          thumbnail: "/projects/haircat7.png",
+          description: "Haircut AI Recommender screen"
+        }
+      ],
+      tags: ["React Native", "TypeScript", "Expo", "Django", "AWS", "Realtime Chat", "AI/ML"],
+      link: "#",
+      type: "fullstack" as const,
+      isMobileApp: true
+    },
+    {
       title: "UP Cebu Campus Explorer",
       description: "Explore UP Cebu Campus - Navigate through buildings, find facilities, and discover the beauty of UP Cebu campus with our interactive map. Get real-time room schedules to plan your day efficiently!",
       images: [
