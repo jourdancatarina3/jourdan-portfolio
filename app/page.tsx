@@ -229,56 +229,70 @@ export default function Home() {
 
   const experiences: Experience[] = [
     {
-      title: "Mobile Application Developer",
-      company: "Bitwork Solutions",
-      period: "March 2024 - Present",
+      title: "Lead Mobile App Developer",
+      company: "Cyberclinic Inc.",
+      period: "February 2025 - Present",
       description: [
-        "Led the development of Badge Guru, a React Native mobile application that scans vehicle emblems and generates precise templates for replacement adhesives.",
-        "Built a complete in-app e-commerce system with product catalog, shopping cart, and order management, integrating Stripe for secure payment processing.",
-        "Implemented a comprehensive user authentication system and profile management features, including secure image handling and user preferences.",
-        "Developed real-time emblem scanning functionality with camera integration, supporting both iOS and Android platforms.",
-        "Built a robust feedback system with email integration using Mailgun, allowing direct user communication and feature suggestions.",
-        "Created an intuitive tutorial system with categorized content management, improving user onboarding and engagement.",
-        "Integrated subscription management for premium features, implementing both one-time purchases and recurring subscriptions.",
-        "Designed and implemented a responsive UI with smooth animations and transitions using React Native's native capabilities."
+        "Led the complete development of the company's cross-platform mobile application using React Native and Expo",
+        "Built the mobile app from the ground up, replicating and integrating core features from the existing web platform, including task management, ticketing, meetings, projects, and accounting modules",
+        "Developed and maintained backend integrations to ensure seamless data synchronization and communication with the company's existing Express.js and MongoDB backend",
+        "Handled all aspects of infrastructure setup, app configuration, and deployment to both the App Store and Google Play Store",
+        "Delivered a fully functional mobile app as a solo developer, achieving feature parity with the large-scale web platform maintained by a multi-developer team"
       ],
       technologies: [
         "React Native",
         "Expo",
-        "TypeScript",
+        "iOS",
+        "Android"
+      ],
+      logo: "/projects/cyberclinic-logo.png"
+    },
+    {
+      title: "Fullstack Web Developer and Mobile App Developer",
+      company: "Bitwork Solutions",
+      period: "March 2024 - March 2025",
+      description: [
+        "Led development of Badge Guru, a React Native mobile app for scanning vehicle emblems and generating vector files for sticker-cutting templates",
+        "Implemented a comprehensive e-commerce system with Stripe integration for secure payments",
+        "Built user authentication system and profile management with secure image handling",
+        "Developed real-time emblem scanning functionality supporting iOS and Android platforms",
+        "Integrated subscription management system for premium features and recurring payments",
+        "Created a robust feedback system using Mailgun for direct user communication"
+      ],
+      technologies: [
+        "React Native",
         "Stripe",
-        "Directus",
-        "AWS",
-        "Tailwind CSS",
-        "Mailgun"
+        "Mailgun",
+        "iOS",
+        "Android"
       ],
       logo: "/projects/bitwork-logo.jpeg"
     },
     {
-      title: "Full Stack Developer",
-      company: "HQzen",
-      period: "Jan 2024 - May 2024",
+      title: "Fullstack Web Developer",
+      company: "HQZen",
+      period: "December 2023 - March 2024",
       description: [
-        "Maintained and resolved critical bugs on HQzen's production website, ensuring uptime and seamless functionality for a growing user base.",
-        "Developed new features to enhance workforce management, including the assignment of employees to respective workforces, streamlining operational efficiency.",
-        "Collaborated with cross-functional teams to understand business requirements and deliver scalable solutions using VueJS and Django.",
-        "Participated in code reviews and syncronized with the team to ensure the best possible solution was implemented fostering a collaborative development environment.",
+        "Maintained and debugged the production website, ensuring optimal uptime and functionality",
+        "Developed workforce management features for employee assignment and operational efficiency",
+        "Collaborated with cross-functional teams to deliver scalable solutions using Vue.js and Django",
+        "Participated in code reviews and team synchronization for optimal solution implementation"
       ],
       technologies: ["Vue.js", "Django", "Python", "PostgreSQL"],
       logo: "/projects/hqzen-logo.png"
     },
     {
-      title: "Frontend Developer",
-      company: "Mind Fusion Ltd",
-      period: "Oct 2021 - Aug 2022",
+      title: "Fullstack Developer",
+      company: "Mind Fusion LTD",
+      period: "October 2021 - January 2023",
       description: [
-        "Developed a fully functional website for software product reviews, taking ownership of the entire front-end development process.",
-        "Designed and optimized web pages using Figma, enhancing usability and visual appeal.",
-        "Collaborated closely with the team to implement client requirements, troubleshoot issues, and ensure smooth API integrations.",
-        "Converted mockups into responsive web pages using HTML, JavaScript, React, NextJS, and Tailwind CSS.",
-        "Delivered features compatible with both mobile and desktop platforms to meet diverse user needs."
+        "Developed and maintained a full-stack product review platform using Next.js, Express, and MongoDB",
+        "Designed and optimized user interfaces in Figma, enhancing usability and overall user experience",
+        "Implemented responsive and accessible front-end components with React, Next.js, and Tailwind CSS",
+        "Built and integrated RESTful APIs with Express.js, managing data persistence and queries via MongoDB",
+        "Ensured cross-platform compatibility and optimized performance for both mobile and desktop users"
       ],
-      technologies: ["React", "Next.js", "JavaScript", "Tailwind CSS", "Figma"],
+      technologies: ["Next.js", "Express.js", "MongoDB", "React", "Tailwind CSS", "Figma"],
       logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623"
     },
   ];
