@@ -86,6 +86,20 @@ export default function Home() {
 
   const projects = [
     {
+      title: "UP Cebu Campus Explorer",
+      description: "Explore UP Cebu Campus - Navigate through buildings, find facilities, and discover the beauty of UP Cebu campus with our interactive map. Get real-time room schedules to plan your day efficiently!",
+      images: [
+        {
+          original: "/projects/up-campus.png",
+          thumbnail: "/projects/up-campus.png",
+          description: "Interactive campus map"
+        },
+      ],
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      link: "https://upsee.sheldonarthursagrado.site/",
+      type: "fullstack" as const
+    },
+    {
       title: "Badge Guru",
       description: "A mobile app that uses robust scanning technology to scan car emblems and automatically generate vector files for custom sticker cutting",
       images: [
@@ -350,11 +364,12 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  function ProjectCard({ project, isFirst }: { project: Project; isFirst: boolean }) {
+  function ProjectCard({ project }: { project: Project }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const hasMultipleImages = project.images.length > 1;
 
     const handleCardClick = () => {
-      if (project.link === "#") {
+      if (project.link === "#" || hasMultipleImages) {
         setIsModalOpen(true);
       } else {
         window.open(project.link, '_blank', 'noopener,noreferrer');
@@ -400,7 +415,7 @@ export default function Home() {
               height={400}
               className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
             />
-            {isFirst && (
+            {hasMultipleImages && (
               <motion.div
                 className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300
                           flex items-end justify-center p-4"
@@ -438,7 +453,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {isFirst && (
+        {hasMultipleImages && (
           <ProjectModal
             project={project}
             isOpen={isModalOpen}
@@ -553,8 +568,7 @@ export default function Home() {
               {projects.map((project, index) => (
                 <ProjectCard 
                   key={index} 
-                  project={project} 
-                  isFirst={index === 0}
+                  project={project}
                 />
               ))}
             </motion.div>
