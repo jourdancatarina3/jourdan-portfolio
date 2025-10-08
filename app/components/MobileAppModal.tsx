@@ -16,6 +16,8 @@ interface MobileAppProject {
   tags: string[];
   link: string;
   type: 'fullstack' | 'frontend';
+  appStoreUrl?: string;
+  playStoreUrl?: string;
 }
 
 interface MobileAppModalProps {
@@ -124,6 +126,42 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
               </div>
             </div>
             <p className="text-text-secondary text-sm">{project.description}</p>
+
+            {/* Store buttons */}
+            {(project.appStoreUrl || project.playStoreUrl) && (
+              <div className="mt-3 flex flex-wrap gap-3">
+                {project.appStoreUrl && (
+                  <motion.a
+                    href={project.appStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black text-white border border-white/10 hover:bg-neutral-800 transition-colors"
+                    aria-label="Download on the App Store"
+                  >
+                    {/* Apple icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="w-4 h-4" fill="currentColor"><path d="M318.7 268.7c-.3-36.7 16.4-64.4 50-84.7-18.8-27.2-46.8-42.2-84.1-45.3-35.3-2.8-73.4 20.5-87.4 20.5-14.4 0-49.3-19.4-76.3-19-58.6.9-121 42.8-121 128.4 0 25.3 4.7 51.5 14.1 78.6 12.5 35.3 57.6 121.9 104.5 120.5 24.6-.6 42-17.2 73.9-17.2 31.5 0 47.6 17.2 76.3 17 47.1-.7 87.8-82.2 100.1-117.6-63.3-30-64.8-90.6-50.1-101.2zM260.2 76.3c27.3-32.4 24.8-61.9 24-72.3-24.1 1.4-52 16.4-67.9 35.7-17.5 21.4-27.6 47.9-25.4 75.4 26.1 2 50.1-11.5 69.3-38.8z"/></svg>
+                    <span className="text-sm font-medium">App Store</span>
+                  </motion.a>
+                )}
+                {project.playStoreUrl && (
+                  <motion.a
+                    href={project.playStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0F9D58] text-white border border-white/10 hover:bg-[#0c7f47] transition-colors"
+                    aria-label="Get it on Google Play"
+                  >
+                    {/* Play icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4 h-4" fill="currentColor"><path d="M71.1 45.1C64.3 50 60 58.2 60 67.1v377.7c0 8.9 4.3 17.1 11.1 22l244.9-210.9L71.1 45.1zM352.6 218.6L115.5 17.9c5.2-3.5 11.5-5.6 18.3-5.6 7.9 0 15.2 2.6 21.1 7l226.1 164.1c7 5.1 11.1 13.2 11.1 21.8s-4.1 16.7-11.1 21.8zM352.6 293.4c7 5.1 11.1 13.2 11.1 21.8s-4.1 16.7-11.1 21.8L154.9 493c-5.9 4.4-13.2 7-21.1 7-6.8 0-13.1-2.1-18.3-5.6l237.1-200.7z"/></svg>
+                    <span className="text-sm font-medium">Google Play</span>
+                  </motion.a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Main Image Display */}

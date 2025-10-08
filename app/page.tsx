@@ -30,6 +30,8 @@ interface Project {
   link: string;
   type: 'fullstack' | 'frontend';
   isMobileApp?: boolean;
+  appStoreUrl?: string;
+  playStoreUrl?: string;
 }
 
 interface Experience {
@@ -88,6 +90,49 @@ export default function Home() {
   });
 
   const projects = [
+    {
+      title: "VEA AI",
+      description: "Enterprise field service app for managing tickets, tasks, customers, and documentation—secure auth, dark mode, calendar integration, and AI-assisted workflows for technicians and managers.",
+      images: [
+        {
+          original: "/projects/vea1.png",
+          thumbnail: "/projects/vea1.png",
+          description: "Sidebar"
+        },
+        {
+          original: "/projects/vea2.png",
+          thumbnail: "/projects/vea2.png",
+          description: "Tasks Screen"
+        },
+        {
+          original: "/projects/vea3.png",
+          thumbnail: "/projects/vea3.png",
+          description: "Task Details Screen"
+        },
+        {
+          original: "/projects/vea4.png",
+          thumbnail: "/projects/vea4.png",
+          description: "Task Notes Screen"
+        },
+        {
+          original: "/projects/vea5.png",
+          thumbnail: "/projects/vea5.png",
+          description: "AI Chat Screen"
+        },
+        {
+          original: "/projects/vea6.png",
+          thumbnail: "/projects/vea6.png",
+          description: "Accounting Lists Screen"
+        }
+      ],
+      tags: ["React Native", "TypeScript", "Expo", "AI", "Calendar", "Secure Auth"],
+      link: "#",
+      type: "fullstack" as const,
+      isMobileApp: true,
+      // Add these when links are available
+      appStoreUrl: "https://apps.apple.com/us/app/vea-ai/id6743689051",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.vea.veamobile",
+    },
     {
       title: "Haircat Barber App",
       description: "A comprehensive mobile application designed specifically for barbers to manage their barbershop accounts and connect with customers through the Haircat ecosystem. Barbers can set up their profiles, manage appointments, and communicate with clients seamlessly.",
