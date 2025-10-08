@@ -110,14 +110,14 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
 
         <div className="space-y-4 h-full flex flex-col">
           <div className="flex-shrink-0">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-2xl font-bold">{project.title}</h2>
-              <div className="flex flex-wrap gap-1">
+            <div className="mb-2">
+              <h2 className="text-2xl font-bold mb-2">{project.title}</h2>
+              <div className="flex flex-wrap gap-1 mb-2">
                 {project.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 bg-primary/10 rounded-full text-xs font-medium text-primary"
-                  >
+                    <span
+                      key={index}
+                      className="px-2 py-1 bg-primary/10 border border-primary rounded-full text-xs font-medium text-primary"
+                    >
                     {tag}
                   </span>
                 ))}
