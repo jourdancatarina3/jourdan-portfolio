@@ -87,51 +87,70 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
             <div className="flex items-center space-x-4">
               {/* Previous Button */}
               {project.images.length > 1 && (
-                <button
+                <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
                     prevImage();
                   }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                   className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                   </svg>
-                </button>
+                </motion.button>
               )}
               
               {/* Image Container */}
-              <div className="relative w-full max-w-xs mx-auto">
-                <Image
-                  src={project.images[currentImageIndex].original}
-                  alt={project.images[currentImageIndex].description || `Screenshot ${currentImageIndex + 1}`}
-                  width={300}
-                  height={600}
-                  className="w-full h-auto rounded-lg shadow-lg object-contain"
-                  priority
-                />
+              <div className="relative w-full max-w-xs mx-auto overflow-hidden">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="w-full"
+                >
+                  <Image
+                    src={project.images[currentImageIndex].original}
+                    alt={project.images[currentImageIndex].description || `Screenshot ${currentImageIndex + 1}`}
+                    width={300}
+                    height={600}
+                    className="w-full h-auto rounded-lg shadow-lg object-contain"
+                    priority
+                  />
+                </motion.div>
               </div>
               
               {/* Next Button */}
               {project.images.length > 1 && (
-                <button
+                <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
                     nextImage();
                   }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                   className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                   </svg>
-                </button>
+                </motion.button>
               )}
             </div>
 
             {/* Image Counter */}
-            <div className="text-sm text-text-secondary">
+            <motion.div 
+              key={`counter-${currentImageIndex}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+              className="text-sm text-text-secondary"
+            >
               {currentImageIndex + 1} of {project.images.length}
-            </div>
+            </motion.div>
             
             {/* Debug Info */}
             <div className="text-xs text-gray-500">
@@ -140,9 +159,15 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
 
             {/* Image Description */}
             {project.images[currentImageIndex].description && (
-              <div className="text-center text-sm text-text-secondary">
+              <motion.div 
+                key={`description-${currentImageIndex}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: 0.15 }}
+                className="text-center text-sm text-text-secondary"
+              >
                 {project.images[currentImageIndex].description}
-              </div>
+              </motion.div>
             )}
           </div>
 
@@ -151,12 +176,14 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
             <div className="flex-shrink-0">
               <div className="flex justify-center space-x-2 overflow-x-auto pb-2">
                 {project.images.map((image, index) => (
-                  <button
+                  <motion.button
                     key={index}
                     onClick={(e) => {
                       e.stopPropagation();
                       goToImage(index);
                     }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className={`flex-shrink-0 w-16 h-32 rounded-lg overflow-hidden border-2 transition-colors cursor-pointer ${
                       index === currentImageIndex 
                         ? 'border-primary ring-2 ring-primary/30' 
@@ -170,7 +197,7 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
                       height={128}
                       className="w-full h-full object-cover"
                     />
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
