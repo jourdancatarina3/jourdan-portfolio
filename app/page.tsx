@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react';
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import { FaReact, FaNodeJs, FaAws, FaVuejs } from 'react-icons/fa';
-import { SiTypescript, SiMongodb, SiDjango, SiTailwindcss, SiSvelte, SiN8N, SiSupabase } from 'react-icons/si';
+import { SiTypescript, SiMongodb, SiDjango, SiTailwindcss, SiSvelte, SiN8N, SiSupabase, SiRedux } from 'react-icons/si';
 import SkillCard from './components/SkillCard';
 import WelcomeAnimation from './components/WelcomeAnimation';
 import { fadeInUp, staggerContainer } from './components/animations';
 import ScrollAnimation from './components/ScrollAnimation';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { HiMail } from 'react-icons/hi';
+import { HiMail, HiAdjustments } from 'react-icons/hi';
 import Footer from './components/Footer';
 import EducationCard from './components/EducationCard';
 import ProjectModal from './components/ProjectModal';
@@ -352,6 +352,8 @@ export default function Home() {
     { name: 'Vue', icon: FaVuejs, level: 80 },
     { name: 'Tailwind', icon: SiTailwindcss, level: 90 },
     { name: 'Svelte', icon: SiSvelte, level: 65 },
+    { name: 'Zustand', icon: HiAdjustments, level: 75 },
+    { name: 'Redux', icon: SiRedux, level: 65 },
     { name: 'n8n', icon: SiN8N, level: 70 },
     { name: 'Supabase', icon: SiSupabase, level: 80 },
   ];
