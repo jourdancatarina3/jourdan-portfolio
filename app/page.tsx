@@ -421,7 +421,7 @@ export default function Home() {
     return (
       <>
         <motion.div
-          className="card h-full group cursor-pointer flex flex-col"
+          className="card group cursor-pointer flex flex-col break-inside-avoid mb-6"
           whileHover={{ y: -5 }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -469,15 +469,15 @@ export default function Home() {
             )}
           </motion.div>
 
-          <div className="flex-grow flex flex-col">
+          <div className="flex flex-col">
             <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
               {project.title}
             </h3>
-            <p className="text-text-secondary mb-4 flex-grow group-hover:text-text-primary transition-colors">
+            <p className="text-text-secondary mb-4 group-hover:text-text-primary transition-colors">
               {project.description}
             </p>
             
-            <div className="flex flex-wrap gap-2 mt-auto">
+            <div className="flex flex-wrap gap-2">
               {project.tags.map((tag, index) => (
                 <span
                   key={index}
@@ -610,7 +610,7 @@ export default function Home() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
+              className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
             >
               {projects.map((project, index) => (
                 <ProjectCard 
