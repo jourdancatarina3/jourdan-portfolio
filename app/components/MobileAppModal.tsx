@@ -226,10 +226,10 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
                       }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`w-16 h-32 rounded-lg overflow-hidden border-2 transition-colors cursor-pointer ${
+                      className={`w-16 h-32 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
                         index === currentImageIndex 
-                          ? 'border-primary ring-2 ring-primary/30' 
-                          : 'border-transparent hover:border-primary/50'
+                          ? 'border-primary ring-2 ring-primary/30 opacity-100' 
+                          : 'border-transparent hover:border-primary/50 opacity-70 hover:opacity-85'
                       }`}
                     >
                       <Image
@@ -237,7 +237,9 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
                         alt={image.description || `Thumbnail ${index + 1}`}
                         width={64}
                         height={128}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full object-cover transition-opacity duration-300 ${
+                          index === currentImageIndex ? 'opacity-100' : 'opacity-75'
+                        }`}
                       />
                     </motion.button>
                   ))}
