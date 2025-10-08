@@ -187,6 +187,25 @@ html {
 
 /* Custom styles for react-image-gallery */
 @layer components {
+  /* Masonry layout gutters */
+  .my-masonry-grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -1.5rem; /* gutter size offset */
+    width: auto;
+  }
+
+  .my-masonry-grid_column {
+    padding-left: 1.5rem; /* gutter size */
+    background-clip: padding-box;
+  }
+
+  /* Optional: add vertical spacing between items */
+  .my-masonry-grid_column > div {
+    margin-bottom: 1.5rem;
+  }
+
   .custom-image-gallery {
     .image-gallery-slide {
       @apply bg-background;

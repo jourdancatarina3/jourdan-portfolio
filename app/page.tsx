@@ -1,5 +1,6 @@
 'use client';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import Masonry from 'react-masonry-css';
 import { useEffect, useState } from 'react';
 import Image from "next/image";
 import Navbar from "./components/Navbar";
@@ -310,6 +311,35 @@ export default function Home() {
       type: "frontend" as const
     }
   ];
+
+  // Display order: Mobile apps first, then fullstack websites, then frontend websites
+  // Also enforce specific priority among mobile apps: Haircat App, Haircat Barber App, Badge Guru
+  const sortedProjects = [...projects].map((p, index) => ({ p, index })).sort((a, b) => {
+    const rank = (proj: Project) => {
+      if (proj.isMobileApp) return 0;
+      if (proj.type === 'fullstack') return 1;
+      return 2; // frontend
+    };
+
+    const titlePriority = (title: string) => {
+      const priorities: Record<string, number> = {
+        'Haircat App': 0,
+        'Haircat Barber App': 1,
+        'Badge Guru': 2,
+      };
+      return priorities[title] ?? 999;
+    };
+
+    const rankDiff = rank(a.p) - rank(b.p);
+    if (rankDiff !== 0) return rankDiff;
+
+    // Within same rank, use explicit title priority when provided
+    const titleDiff = titlePriority(a.p.title) - titlePriority(b.p.title);
+    if (titleDiff !== 0) return titleDiff;
+
+    // Stable fallback to original order
+    return a.index - b.index;
+  }).map(({ p }) => p);
 
   const skills = [
     { name: 'React/Next.js', icon: FaReact, level: 90 },
@@ -655,14 +685,18 @@ export default function Home() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
             >
-              {projects.map((project, index) => (
-                <ProjectCard 
-                  key={index} 
-                  project={project}
-                />
-              ))}
+              <Masonry
+                breakpointCols={{ default: 3, 1024: 3, 768: 2, 0: 1 }}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+              >
+                {sortedProjects.map((project, index) => (
+                  <div key={index} className="mb-6">
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
+              </Masonry>
             </motion.div>
           </div>
         </section>
