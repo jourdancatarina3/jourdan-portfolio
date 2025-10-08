@@ -481,7 +481,7 @@ export default function Home() {
               {project.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 bg-secondary/50 rounded-full text-sm font-medium text-text-secondary"
+                  className="px-3 py-1 bg-secondary/50 border border-text-secondary rounded-full text-sm font-medium text-text-secondary"
                 >
                   {tag}
                 </span>
