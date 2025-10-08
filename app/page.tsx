@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import { FaReact, FaNodeJs, FaAws, FaVuejs } from 'react-icons/fa';
-import { SiTypescript, SiMongodb, SiDjango, SiTailwindcss } from 'react-icons/si';
+import { SiTypescript, SiMongodb, SiDjango, SiTailwindcss, SiSvelte, SiN8N, SiSupabase } from 'react-icons/si';
 import SkillCard from './components/SkillCard';
 import WelcomeAnimation from './components/WelcomeAnimation';
 import { fadeInUp, staggerContainer } from './components/animations';
@@ -225,6 +225,9 @@ export default function Home() {
     { name: 'AWS', icon: FaAws, level: 60 },
     { name: 'Vue', icon: FaVuejs, level: 80 },
     { name: 'Tailwind', icon: SiTailwindcss, level: 90 },
+    { name: 'Svelte', icon: SiSvelte, level: 65 },
+    { name: 'n8n', icon: SiN8N, level: 70 },
+    { name: 'Supabase', icon: SiSupabase, level: 80 },
   ];
 
   const experiences: Experience[] = [
