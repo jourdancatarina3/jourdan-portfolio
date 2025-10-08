@@ -525,7 +525,7 @@ export default function Home() {
               alt={project.title}
               width={600}
               height={400}
-              className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
+              className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer border border-black/10 dark:border-white/20"
             />
             {hasMultipleImages && (
               <motion.div
