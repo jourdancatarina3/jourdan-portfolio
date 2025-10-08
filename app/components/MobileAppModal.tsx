@@ -133,15 +133,15 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
               <div className="flex items-center space-x-4">
                 {/* Previous Button */}
                 {project.images.length > 1 && (
-                  <motion.button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      prevImage();
-                    }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
-                  >
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevImage();
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
+                >
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -150,14 +150,7 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
                 
                 {/* Image Container */}
                 <div className="relative w-full max-w-xs mx-auto overflow-hidden">
-                  <motion.div
-                    key={currentImageIndex}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="w-full"
-                  >
+                  <div className="w-full">
                     <Image
                       src={project.images[currentImageIndex].original}
                       alt={project.images[currentImageIndex].description || `Screenshot ${currentImageIndex + 1}`}
@@ -191,20 +184,20 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
                         });
                       }}
                     />
-                  </motion.div>
+                  </div>
                 </div>
                 
                 {/* Next Button */}
                 {project.images.length > 1 && (
-                  <motion.button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      nextImage();
-                    }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
-                  >
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextImage();
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
+                >
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
@@ -224,9 +217,9 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
                         e.stopPropagation();
                         goToImage(index);
                       }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`w-16 h-32 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`w-16 h-32 rounded-lg overflow-hidden border-2 transition-all duration-200 cursor-pointer ${
                         index === currentImageIndex 
                           ? 'border-primary ring-2 ring-primary/30 opacity-100' 
                           : 'border-transparent hover:border-primary/50 opacity-70 hover:opacity-85'
