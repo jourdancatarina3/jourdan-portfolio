@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface MobileAppImage {
   original: string;
@@ -27,20 +27,52 @@ interface MobileAppModalProps {
 export default function MobileAppModal({ project, isOpen, onClose }: MobileAppModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Reset to first image when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setCurrentImageIndex(0);
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
+  // Debug logging
+  console.log('MobileAppModal rendered:', {
+    currentImageIndex,
+    totalImages: project.images.length,
+    currentImageSrc: project.images[currentImageIndex]?.original,
+    isFirstImage: currentImageIndex === 0
+  });
+
   const nextImage = () => {
-    console.log('Next image clicked, current:', currentImageIndex, 'total:', project.images.length);
-    setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+    const newIndex = (currentImageIndex + 1) % project.images.length;
+    console.log('Next image clicked:', {
+      from: currentImageIndex,
+      to: newIndex,
+      total: project.images.length,
+      isFirstImage: newIndex === 0
+    });
+    setCurrentImageIndex(newIndex);
   };
 
   const prevImage = () => {
-    console.log('Prev image clicked, current:', currentImageIndex, 'total:', project.images.length);
-    setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+    const newIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
+    console.log('Prev image clicked:', {
+      from: currentImageIndex,
+      to: newIndex,
+      total: project.images.length,
+      isFirstImage: newIndex === 0
+    });
+    setCurrentImageIndex(newIndex);
   };
 
   const goToImage = (index: number) => {
-    console.log('Go to image:', index);
+    console.log('Go to image:', {
+      from: currentImageIndex,
+      to: index,
+      total: project.images.length,
+      isFirstImage: index === 0
+    });
     setCurrentImageIndex(index);
   };
 
@@ -78,143 +110,140 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
 
         <div className="space-y-4 h-full flex flex-col">
           <div className="flex-shrink-0">
-            <h2 className="text-2xl font-bold mb-2">{project.title}</h2>
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-2xl font-bold">{project.title}</h2>
+              <div className="flex flex-wrap gap-1">
+                {project.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-1 bg-primary/10 rounded-full text-xs font-medium text-primary"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
             <p className="text-text-secondary text-sm">{project.description}</p>
           </div>
 
           {/* Main Image Display */}
-          <div className="flex-1 flex flex-col items-center space-y-4">
-            <div className="flex items-center space-x-4">
-              {/* Previous Button */}
-              {project.images.length > 1 && (
-                <motion.button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    prevImage();
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
-                >
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                  </svg>
-                </motion.button>
-              )}
-              
-              {/* Image Container */}
-              <div className="relative w-full max-w-xs mx-auto overflow-hidden">
-                <motion.div
-                  key={currentImageIndex}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="w-full"
-                >
-                  <Image
-                    src={project.images[currentImageIndex].original}
-                    alt={project.images[currentImageIndex].description || `Screenshot ${currentImageIndex + 1}`}
-                    width={300}
-                    height={600}
-                    className="w-full h-auto rounded-lg shadow-lg object-contain"
-                    priority
-                  />
-                </motion.div>
-              </div>
-              
-              {/* Next Button */}
-              {project.images.length > 1 && (
-                <motion.button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    nextImage();
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
-                >
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </motion.button>
-              )}
-            </div>
-
-            {/* Image Counter */}
-            <motion.div 
-              key={`counter-${currentImageIndex}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2, delay: 0.1 }}
-              className="text-sm text-text-secondary"
-            >
-              {currentImageIndex + 1} of {project.images.length}
-            </motion.div>
-            
-            {/* Debug Info */}
-            <div className="text-xs text-gray-500">
-              Debug: Index {currentImageIndex}, Total {project.images.length}
-            </div>
-
-            {/* Image Description */}
-            {project.images[currentImageIndex].description && (
-              <motion.div 
-                key={`description-${currentImageIndex}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, delay: 0.15 }}
-                className="text-center text-sm text-text-secondary"
-              >
-                {project.images[currentImageIndex].description}
-              </motion.div>
-            )}
-          </div>
-
-          {/* Thumbnail Navigation */}
-          {project.images.length > 1 && (
-            <div className="flex-shrink-0">
-              <div className="flex justify-center space-x-2 overflow-x-auto pb-2">
-                {project.images.map((image, index) => (
+          <div className="flex-1 flex items-start space-x-6">
+            {/* Left Side - Navigation and Main Image */}
+            <div className="flex-1 flex flex-col items-center space-y-4">
+              <div className="flex items-center space-x-4">
+                {/* Previous Button */}
+                {project.images.length > 1 && (
                   <motion.button
-                    key={index}
                     onClick={(e) => {
                       e.stopPropagation();
-                      goToImage(index);
+                      prevImage();
                     }}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`flex-shrink-0 w-16 h-32 rounded-lg overflow-hidden border-2 transition-colors cursor-pointer ${
-                      index === currentImageIndex 
-                        ? 'border-primary ring-2 ring-primary/30' 
-                        : 'border-transparent hover:border-primary/50'
-                    }`}
+                    className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
+                  >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </motion.button>
+                )}
+                
+                {/* Image Container */}
+                <div className="relative w-full max-w-xs mx-auto overflow-hidden">
+                  <motion.div
+                    key={currentImageIndex}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="w-full"
                   >
                     <Image
-                      src={image.thumbnail}
-                      alt={image.description || `Thumbnail ${index + 1}`}
-                      width={64}
-                      height={128}
-                      className="w-full h-full object-cover"
+                      src={project.images[currentImageIndex].original}
+                      alt={project.images[currentImageIndex].description || `Screenshot ${currentImageIndex + 1}`}
+                      width={300}
+                      height={600}
+                      className="w-full h-auto rounded-lg shadow-lg object-contain"
+                      priority={currentImageIndex === 0}
+                      style={{ 
+                        width: '300px',
+                        height: 'auto',
+                        minHeight: '500px',
+                        maxHeight: '700px'
+                      }}
+                      onLoad={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        console.log('Image loaded:', {
+                          index: currentImageIndex,
+                          src: project.images[currentImageIndex].original,
+                          isFirst: currentImageIndex === 0,
+                          naturalWidth: img.naturalWidth,
+                          naturalHeight: img.naturalHeight,
+                          renderedWidth: img.offsetWidth,
+                          renderedHeight: img.offsetHeight
+                        });
+                      }}
+                      onError={(e) => {
+                        console.error('Image load error:', {
+                          index: currentImageIndex,
+                          src: project.images[currentImageIndex].original,
+                          error: e
+                        });
+                      }}
                     />
+                  </motion.div>
+                </div>
+                
+                {/* Next Button */}
+                {project.images.length > 1 && (
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextImage();
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
+                  >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
                   </motion.button>
-                ))}
+                )}
               </div>
             </div>
-          )}
 
-          {/* Tags */}
-          <div className="flex-shrink-0">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {project.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            {/* Right Side - Thumbnail Navigation */}
+            {project.images.length > 1 && (
+              <div className="flex-shrink-0 w-20">
+                <div className="flex flex-col space-y-2 max-h-96 overflow-y-auto">
+                  {project.images.map((image, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToImage(index);
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`w-16 h-32 rounded-lg overflow-hidden border-2 transition-colors cursor-pointer ${
+                        index === currentImageIndex 
+                          ? 'border-primary ring-2 ring-primary/30' 
+                          : 'border-transparent hover:border-primary/50'
+                      }`}
+                    >
+                      <Image
+                        src={image.thumbnail}
+                        alt={image.description || `Thumbnail ${index + 1}`}
+                        width={64}
+                        height={128}
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </motion.div>
