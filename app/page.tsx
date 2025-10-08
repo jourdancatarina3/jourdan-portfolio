@@ -14,6 +14,7 @@ import { HiMail } from 'react-icons/hi';
 import Footer from './components/Footer';
 import EducationCard from './components/EducationCard';
 import ProjectModal from './components/ProjectModal';
+import MobileAppModal from './components/MobileAppModal';
 import ContactSection from './components/ContactSection';
 
 interface Project {
@@ -27,6 +28,7 @@ interface Project {
   tags: string[];
   link: string;
   type: 'fullstack' | 'frontend';
+  isMobileApp?: boolean;
 }
 
 interface Experience {
@@ -85,6 +87,41 @@ export default function Home() {
   });
 
   const projects = [
+    {
+      title: "Haircat Barber App",
+      description: "A comprehensive mobile application designed specifically for barbers to manage their barbershop accounts and connect with customers through the Haircat ecosystem. Barbers can set up their profiles, manage appointments, and communicate with clients seamlessly.",
+      images: [
+        {
+          original: "/projects/haircat-barber1.png",
+          thumbnail: "/projects/haircat-barber1.png",
+          description: "Dashboard screen"
+        },
+        {
+          original: "/projects/haircat-barber2.png",
+          thumbnail: "/projects/haircat-barber2.png",
+          description: "Barber info screen"
+        },
+        {
+          original: "/projects/haircat-barber3.png",
+          thumbnail: "/projects/haircat-barber3.png",
+          description: "Messages screen"
+        },
+        {
+          original: "/projects/haircat-barber4.png",
+          thumbnail: "/projects/haircat-barber4.png",
+          description: "Message details screen"
+        },
+        {
+          original: "/projects/haircat-barber5.png",
+          thumbnail: "/projects/haircat-barber5.png",
+          description: "Notifications screen"
+        },
+      ],
+      tags: ["React Native", "Expo", "TypeScript", "Firebase"],
+      link: "#",
+      type: "fullstack" as const,
+      isMobileApp: true
+    },
     {
       title: "UP Cebu Campus Explorer",
       description: "Explore UP Cebu Campus - Navigate through buildings, find facilities, and discover the beauty of UP Cebu campus with our interactive map. Get real-time room schedules to plan your day efficiently!",
@@ -454,11 +491,21 @@ export default function Home() {
         </motion.div>
 
         {hasMultipleImages && (
-          <ProjectModal
-            project={project}
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          />
+          <>
+            {project.isMobileApp ? (
+              <MobileAppModal
+                project={project}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+              />
+            ) : (
+              <ProjectModal
+                project={project}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+              />
+            )}
+          </>
         )}
       </>
     );
