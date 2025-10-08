@@ -84,42 +84,47 @@ export default function MobileAppModal({ project, isOpen, onClose }: MobileAppMo
 
           {/* Main Image Display */}
           <div className="flex-1 flex flex-col items-center space-y-4">
-            <div className="relative w-full max-w-xs mx-auto">
-              <Image
-                src={project.images[currentImageIndex].original}
-                alt={project.images[currentImageIndex].description || `Screenshot ${currentImageIndex + 1}`}
-                width={300}
-                height={600}
-                className="w-full h-auto rounded-lg shadow-lg object-contain"
-                priority
-              />
-              
-              {/* Navigation Arrows */}
+            <div className="flex items-center space-x-4">
+              {/* Previous Button */}
               {project.images.length > 1 && (
-                <>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      prevImage();
-                    }}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-black/60 hover:bg-black/80 transition-colors z-10"
-                  >
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      nextImage();
-                    }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-black/60 hover:bg-black/80 transition-colors z-10"
-                  >
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevImage();
+                  }}
+                  className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
+                >
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+              )}
+              
+              {/* Image Container */}
+              <div className="relative w-full max-w-xs mx-auto">
+                <Image
+                  src={project.images[currentImageIndex].original}
+                  alt={project.images[currentImageIndex].description || `Screenshot ${currentImageIndex + 1}`}
+                  width={300}
+                  height={600}
+                  className="w-full h-auto rounded-lg shadow-lg object-contain"
+                  priority
+                />
+              </div>
+              
+              {/* Next Button */}
+              {project.images.length > 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextImage();
+                  }}
+                  className="p-3 rounded-full bg-primary hover:bg-accent transition-colors"
+                >
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               )}
             </div>
 
