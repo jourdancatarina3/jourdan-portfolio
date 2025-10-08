@@ -117,7 +117,7 @@ export default function Home() {
           description: "Notifications screen"
         },
       ],
-      tags: ["React Native", "Expo", "TypeScript", "Firebase"],
+      tags: ["React Native", "TypeScript", "Expo", "Django", "AWS"],
       link: "#",
       type: "fullstack" as const,
       isMobileApp: true
